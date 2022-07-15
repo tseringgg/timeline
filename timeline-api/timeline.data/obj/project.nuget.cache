@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8DxFPqQeXX+VTeZxfmndssQ+MOLjAOW32ylllRSdjrAvJSNFRy5U/QKFTt31bfHffdZW+WuU/4Yi/JC1hjfM+w==",
+  "dgSpecHash": "lXnIRlQZslIm42TP2/yF0vEzzvCfcdD4pMOsrPoqizTwURbOFg1WAKI9fz4yAcQ2L5crBjSRaN6fLrxe8zkdEQ==",
   "success": true,
-  "projectFilePath": "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj",
+  "projectFilePath": "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jorje\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\jorje\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

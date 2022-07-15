@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\git\\timeline.api\\timeline.api\\timeline.api.csproj": {}
+    "C:\\git\\timeline\\timeline-api\\timeline.api\\timeline.api.csproj": {}
   },
   "projects": {
-    "C:\\git\\timeline.api\\timeline.api\\timeline.api.csproj": {
+    "C:\\git\\timeline\\timeline-api\\timeline.api\\timeline.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\timeline.api\\timeline.api\\timeline.api.csproj",
+        "projectUniqueName": "C:\\git\\timeline\\timeline-api\\timeline.api\\timeline.api.csproj",
         "projectName": "timeline.api",
-        "projectPath": "C:\\git\\timeline.api\\timeline.api\\timeline.api.csproj",
+        "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.api\\timeline.api.csproj",
         "packagesPath": "C:\\Users\\jorje\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\timeline.api\\timeline.api\\obj\\",
+        "outputPath": "C:\\git\\timeline\\timeline-api\\timeline.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -35,8 +35,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\git\\timeline.api\\timeline.domain\\timeline.domain.csproj": {
-                "projectPath": "C:\\git\\timeline.api\\timeline.domain\\timeline.domain.csproj"
+              "C:\\git\\timeline\\timeline-api\\timeline.domain\\timeline.domain.csproj": {
+                "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.domain\\timeline.domain.csproj"
               }
             }
           }
@@ -94,18 +94,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj": {
+    "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj",
+        "projectUniqueName": "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj",
         "projectName": "timeline.data",
-        "projectPath": "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj",
+        "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj",
         "packagesPath": "C:\\Users\\jorje\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\timeline.api\\timeline.data\\obj\\",
+        "outputPath": "C:\\git\\timeline\\timeline-api\\timeline.data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -169,18 +169,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\git\\timeline.api\\timeline.domain\\timeline.domain.csproj": {
+    "C:\\git\\timeline\\timeline-api\\timeline.domain\\timeline.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\timeline.api\\timeline.domain\\timeline.domain.csproj",
+        "projectUniqueName": "C:\\git\\timeline\\timeline-api\\timeline.domain\\timeline.domain.csproj",
         "projectName": "timeline.domain",
-        "projectPath": "C:\\git\\timeline.api\\timeline.domain\\timeline.domain.csproj",
+        "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.domain\\timeline.domain.csproj",
         "packagesPath": "C:\\Users\\jorje\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\timeline.api\\timeline.domain\\obj\\",
+        "outputPath": "C:\\git\\timeline\\timeline-api\\timeline.domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -204,8 +204,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj": {
-                "projectPath": "C:\\git\\timeline.api\\timeline.data\\timeline.data.csproj"
+              "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj": {
+                "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj"
               }
             }
           }
@@ -240,7 +240,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

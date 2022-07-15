@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0X35FBg0qMiqu3KFMoHCQT/1+SnnDQ4oVuJA4inWnyLsX0Mq5L5HkGmGxJ86E/Vc08pryWUss5THb1yZxn5keg==",
+  "dgSpecHash": "zIuQ6rvYq0ixAQn65Gy850Qwwr6VHT4xbdrNNL4W52B9BtV63+6f32zdiIpm3QwC/7dHR8lTr8MZMtOsbwmGPw==",
   "success": true,
-  "projectFilePath": "C:\\git\\timeline.api\\timeline.api\\timeline.api.csproj",
+  "projectFilePath": "C:\\git\\timeline\\timeline-api\\timeline.api\\timeline.api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jorje\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\jorje\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
