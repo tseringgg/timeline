@@ -3,6 +3,7 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 import { InteractionStatus, PopupRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private authService: MsalService) { }
+  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private authService: AuthService, private broadcastService: MsalBroadcastService, private msalService: MsalService) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -27,39 +28,45 @@ export class AppComponent implements OnInit, OnDestroy {
     )
     .subscribe(() => {
       this.setLoginDisplay();
-    })
+    });
+
+    this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
   }
 
   login() {
-    if (this.msalGuardConfig.authRequest){
-      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
-        .subscribe({
-          next: (result) => {
-            console.log(result);
-            this.setLoginDisplay();
-          },
-          error: (error) => console.log(error)
-        });
-    } else {
-      this.authService.loginPopup()
-        .subscribe({
-          next: (result) => {
-            console.log(result);
-            this.setLoginDisplay();
-          },
-          error: (error) => console.log(error)
-        });
-    }
+    this.authService.login();
+    // if (this.msalGuardConfig.authRequest){
+    //   this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
+    //     .subscribe({
+    //       next: (result) => {
+    //         console.log(result);
+    //         this.setLoginDisplay();
+    //       },
+    //       error: (error) => console.log(error)
+    //     });
+    // } else {
+    //   this.authService.loginPopup()
+    //     .subscribe({
+    //       next: (result) => {
+    //         console.log(result);
+    //         this.setLoginDisplay();
+    //       },
+    //       error: (error) => console.log(error)
+    //     });
+    // }
   }
 
   logout() { // Add log out function here
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
-    });
+    this.authService.logout();
+    // this.authService.logoutPopup({
+    //   mainWindowRedirectUri: "/"
+    // });
   }
 
   setLoginDisplay() {
-    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+    this.authService.isUserLoggedIn$
+          .subscribe(x => this.loginDisplay = x);
+    //this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,64 @@
+.title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+  height: 40px;
+  width: 600px;
+  background-color: rgb(62, 86, 160);
+  border-bottom: solid 2px white;
+}
+
+.title h2 {
+  color: rgb(216, 226, 246);
+}
+
+.title h2, .prehistoric-data, .timeline {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.prehistoric-data {
+  background-color: rgb(106, 154, 201);
+  margin-top: 0px;
+  width: 600px;
+
+  margin-bottom: 0px;
+  border-bottom: solid 2px rgb(255, 255, 255);
+  color: rgb(249, 249, 254);
+  font-size: 14px;
+}
+
+.timeline {
+  width: 600px;
+  border: solid 1px royalblue;
+  margin-top: 0px;
+}
+
+.legend  {
+  font-size: 18px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  margin-top: 0px;
+  width: 600px;
+  border-bottom: solid 1px gray;
+  background-color: rgb(190, 237, 237);
+}
+
+.legend-header {
+  color: seagreen;
+  padding-left: 10px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.legend-tibet {
+  color: midnightblue;
+}
+
+.legend-world {
+  color: red;
+}
+
+.legend-world {
+  margin-left: 8px;
+}

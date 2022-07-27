@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent
+  }
+
 ];
 
 const isIframe = window !== window.parent && !window.opener;

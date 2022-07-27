@@ -11,12 +11,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { MsalGuard, MsalModule } from '@azure/msal-angular';
+import { MsalGuard, MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EventEntryComponent } from './event-entry/event-entry.component';
 import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { AuthInterceptorService } from './services/Http-interceptor.service';
+import { EventListComponent } from './event-list/event-list.component';
+import { TimelineDisplayComponent } from './timeline/timeline.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -25,7 +29,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    EventEntryComponent
+    EventEntryComponent,
+    UnauthorizedComponent,
+    EventListComponent,
+    TimelineDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,17 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     })
   ],
   providers: [
-    MsalGuard
+    MsalGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
