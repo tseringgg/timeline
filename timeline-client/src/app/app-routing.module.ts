@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
+import { AdminComponent } from './admin/admin.component';
+import { EventListComponent } from './event-list/event-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { TimelineComponent } from './timeline/timeline.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
@@ -13,8 +14,8 @@ const routes: Routes = [
     canActivate: [MsalGuard]
   },
   {
-    path: 'timeline',
-    component: TimelineComponent
+    path: 'admin',
+    component: AdminComponent
   },
   {
     path: '',

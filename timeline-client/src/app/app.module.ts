@@ -21,18 +21,21 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AuthInterceptorService } from './services/Http-interceptor.service';
 import { EventListComponent } from './event-list/event-list.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { AdminComponent } from './admin/admin.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminComponent,
     HomeComponent,
     ProfileComponent,
     EventEntryComponent,
     UnauthorizedComponent,
     EventListComponent,
-    TimelineComponent
+    TimelineComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

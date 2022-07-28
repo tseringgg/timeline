@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EventModel } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
@@ -13,7 +13,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   eventsList: EventModel[];
   subs: Subscription[] = [];
 
-  @ViewChild('myCanvas', {static: false}) myCanvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('myCanvas', {static: false}) myCanvas?: ElementRef<HTMLCanvasElement>;
 
   public context: CanvasRenderingContext2D;
   ctx: CanvasRenderingContext2D;
@@ -36,8 +36,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   yPos = this.verticalStartPos;
   labelPos = 70;
   readonly timeIncrement = this.timeGapPixels;
-  earliestCentury = -9;
-  latestCentury = 7;
+  earliestCentury = -5;
+  latestCentury = 3;
+  canvasHeight = 0;
 
   /* Date Unit */
   readonly xPosLabel = 0;
@@ -47,6 +48,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   readonly eventHeaderXPos = 20;
 
   horizontalLineLength = 600;
+
+  isReady = false;
 
   circleColors = [
     "navajowhite", "yellow", "lightpink", "peachpuff", "aquamarine", "aqua", "lightgreen", "lightblue", "lavender", "thistle"
@@ -59,26 +62,41 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //this.drawTimelines();
+    //this.getEvents();
+    // this.drawTimelines();
   }
 
   getEvents() {
     this.eventDataService.get()
           .subscribe({
             next: (data) => {
+              this.isReady = true;
               this.eventsList = data;
-              this.drawTimelines();
+            //  this.drawTimelines();
+             this.calculateCanvasDimensions(this.eventsList);
+             this.setCanvasHeight();
             },
             error: (err) => {},
-            complete: () => {}
+            complete: () => {
+              // this.drawTimelines();
+              setTimeout(() => this.drawTimelines(), 0);
+            }
           })
   }
 
   drawTimelines(): void {
-    this.ctx = this.myCanvas?.nativeElement.getContext('2d');
+
 
     //this.ctx.beginPath();
     //this.moveToBaseLine();
+    // this.calculateCanvasDimensions(this.eventsList);
+    // this.setCanvasHeight();
+
+    if (!this.myCanvas) {
+      return;
+    }
+
+    this.ctx = this.myCanvas?.nativeElement.getContext('2d');
 
     this.drawTimelineLabels();
 
@@ -95,6 +113,47 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       new EventModel(2, "hfeianfeja", "BC", 111),
       new EventModel(3, "Birth of Christ", "BC", 800)
     ]
+  }
+
+  calculateCanvasDimensions(list: EventModel[]): void {
+    let yearList = new Array<Number>(list.length);
+    let earliestYear;
+    let latestYear;
+
+    for(let i = 0; i < yearList.length; i++) {
+      if(list[i].era == "BC") {
+        yearList[i] = list[i].year * -1;
+      } else {
+        yearList[i] = list[i].year;
+      }
+    }
+    latestYear = earliestYear = yearList[0];
+
+    yearList.forEach(x => {
+      if(x > latestYear) {
+        latestYear = x;
+      }
+      if (x < earliestYear){
+        earliestYear = x;
+      }
+    });
+
+    if(earliestYear < 0) {
+      this.earliestCentury = Math.floor(earliestYear / 100);
+    } else if(earliestYear >= 0) {
+      this.earliestCentury = Math.floor(earliestYear / 100);
+    }
+    if(latestYear < 0) {
+      this.latestCentury = Math.ceil(latestYear / 100);
+    } else if(latestYear >= 0) {
+      this.latestCentury = Math.ceil(latestYear / 100);
+    }
+    // this.setCanvasHeight();
+  }
+
+  setCanvasHeight() {
+    this.canvasHeight = (this.latestCentury - this.earliestCentury) * this.timeGapPixels + this.verticalStartPos * 2;
+    //console.log(this.canvasHeight);
   }
 
   drawTimelineLabels(): void {
@@ -168,7 +227,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
     let timelinePos = relativeZero + displacementFromZero;
     this.ctx.font = "14px Calibri";
-    console.log(timelinePos);
+    //console.log(timelinePos);
     this.ctx.fillText(`- ${year} ${period} -`, this.xPos + 8, timelinePos);
 
     this.ctx.fillText(`${title}`, this.xPos + 66, timelinePos);
