@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AuthInterceptorService } from './services/Http-interceptor.service';
 import { EventListComponent } from './event-list/event-list.component';
-import { TimelineDisplayComponent } from './timeline/timeline.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -32,7 +32,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EventEntryComponent,
     UnauthorizedComponent,
     EventListComponent,
-    TimelineDisplayComponent
+    TimelineComponent
   ],
   imports: [
     BrowserModule,

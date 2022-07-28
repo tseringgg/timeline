@@ -1,13 +1,17 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { EventModel } from '../models/event.model';
+import { EventDataService } from '../services/event-data.service';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css']
 })
-export class TimelineDisplayComponent implements OnInit, AfterViewInit {
+export class TimelineComponent implements OnInit, AfterViewInit {
   title = 'drawgraph';
+  eventsList: EventModel[];
+  subs: Subscription[] = [];
 
   @ViewChild('myCanvas', {static: false}) myCanvas: ElementRef<HTMLCanvasElement>;
 
@@ -32,6 +36,8 @@ export class TimelineDisplayComponent implements OnInit, AfterViewInit {
   yPos = this.verticalStartPos;
   labelPos = 70;
   readonly timeIncrement = this.timeGapPixels;
+  earliestCentury = -9;
+  latestCentury = 7;
 
   /* Date Unit */
   readonly xPosLabel = 0;
@@ -45,142 +51,67 @@ export class TimelineDisplayComponent implements OnInit, AfterViewInit {
   circleColors = [
     "navajowhite", "yellow", "lightpink", "peachpuff", "aquamarine", "aqua", "lightgreen", "lightblue", "lavender", "thistle"
   ]
+  constructor(private eventDataService: EventDataService){}
 
   ngOnInit(): void {
-
+    this.getEvents();
+    //this.getSampleEvents();
   }
 
   ngAfterViewInit(): void {
+    //this.drawTimelines();
+  }
+
+  getEvents() {
+    this.eventDataService.get()
+          .subscribe({
+            next: (data) => {
+              this.eventsList = data;
+              this.drawTimelines();
+            },
+            error: (err) => {},
+            complete: () => {}
+          })
+  }
+
+  drawTimelines(): void {
     this.ctx = this.myCanvas?.nativeElement.getContext('2d');
 
-    const data = [
-      {
-        "centuryId": "600",
-        "period": "BC",
-        "events": [{ "year": "673", "event": "Birth of Jesus", "country": "China" }],
-      },
-      {
-        "centuryId": "500",
-        "period": "BC",
-        "events": [{ "year": "563", "event": "Birth of Buddha Shakyamuni", "country": "tibet" }],
-      },
-      {
-        "centuryId": "400",
-        "period": "BC",
-        "events": [{ "year": "452", "event": "Birth of Jesus", "country": "China" }],
-      },
-      {
-        "centuryId": "300",
-        "period": "BC",
-        "events": [{ "year": "342", "event": "Birth of Jesus", "country": "India" }],
-      },
-      {
-        "centuryId": "200",
-        "period": "BC",
-        "events": [{ "year": "212", "event": "Birth of Jesus", "country": "China" }],
-      },
-      {
-        "centuryId": "100",
-        "period": "BC",
-        "events": [{ "year": "113", "event": "Birth of Jesus", "country": "Tibet" }],
-      },
-      {
-        "centuryId": "0",
-        "period": "AD",
-        "events": [{ "year": "12", "event": "Birth of Jesus", "period": "AD", "country": "India"  }],
-      },
-      {
-        "centuryId": "100",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "200",
-        "period": "AD",
-        "events": [{ "year": "256", "event": "256 Birth of Foo Tsenpo lljl afakkj adfllll df af lasdfj \ln alfjalfjlj saf llalsf lal ", "country": "Tibet" }],
-      },
-      {
-        "centuryId": "300",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "400",
-        "period": "AD",
-        "events": [{ "year": "436", "event": "436 Birth of Foo Tsenpo", "country": "China" }],
-      },
-      {
-        "centuryId": "500",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "600",
-        "period": "AD",
-        "events": [{ "year": "655", "event": "655 Birth of Foo Tsenpo", "country": "India" }],
-      },
-      {
-        "centuryId": "700",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "800",
-        "period": "AD",
-       "events": []
-      },
-      {
-        "centuryId": "900",
-        "period": "AD",
-        "events": [{ "year": "956", "event": "956 Birth of Foo Tsenpo", "country": "Tibet" }],
-      },
-      {
-        "centuryId": "1000",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "1100",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "1200",
-        "period": "AD",
-        "events": [{ "year": "1256", "event": "1234 Birth of Foo Tsenpo", "country": "Tibet" }],
-      },
-      {
-        "centuryId": "1300",
-        "period": "AD",
-        "events": []
-      },
-      {
-        "centuryId": "1400",
-        "period": "AD",
-        "events": [{ "year": "1426", "event": "1434 Birth of Foo Tsenpo", "country": "Tibet" }],
-      },
-      {
-        "centuryId": "1500",
-        "period": "AD",
-        "events": []
-      },
-    ]
+    //this.ctx.beginPath();
+    //this.moveToBaseLine();
 
-    this.ctx.beginPath();
-    this.moveToBaseLine();
+    this.drawTimelineLabels();
 
-    data.forEach(x => {
-      this.drawCircle();
-      this.drawVerticalLine();
-      this.drawTimelineLabel(x['centuryId'], x['period']);
-      if (x['events'].length > 0) {
-        this.drawEvent(x);
-      }
-      this.incrementYPos();
-      this.incrementDateLabelYPos();
-    });
+    this.eventsList?.forEach(x => {
+      this.drawEvent(x);
+    })
 
     this.ctx.stroke();
+  }
+
+  getSampleEvents(){
+    this.eventsList = [
+      new EventModel(1, "Death of Bob", "AD", 124),
+      new EventModel(2, "hfeianfeja", "BC", 111),
+      new EventModel(3, "Birth of Christ", "BC", 800)
+    ]
+  }
+
+  drawTimelineLabels(): void {
+    for(let i = this.earliestCentury; i <= this.latestCentury; i++){
+      let period;
+      this.drawCircle();
+      this.drawVerticalLine();
+      if(i < 0) {
+        period = "BC";
+      } else {
+        period = "AD";
+      }
+      let centuryId = Math.abs(i)*100
+      this.drawTimelineLabel(centuryId.toString(), period);
+      this.incrementYPos();
+      this.incrementDateLabelYPos();
+    }
   }
 
   drawCircle(): void {
@@ -224,20 +155,21 @@ export class TimelineDisplayComponent implements OnInit, AfterViewInit {
     }
   }
 
-  drawEvent(entry: any): void {
-    let event = entry['events'][0];
-    let title = event.event;
-    let year = +event.year;
-    let centuryId = +entry.centuryId;
-    let period = entry.period;
-    let country:string = event.country.toString();
+  drawEvent(entry: EventModel): void {
+    let title = entry.title;
+    let year = entry.year;
+    let period = entry.era;
+    let relativeZero = this.timeGapPixels * Math.abs(this.earliestCentury) + this.verticalStartPos;
+    let displacementFromZero = (this.timeGapPixels / 100) * year;
 
-    let temp = (this.timeGapPixels / 100) * (year - centuryId);
-    let timelinePos = this.yPos + temp;
+    if(period == "BC"){
+      displacementFromZero *= -1;
+    }
+
+    let timelinePos = relativeZero + displacementFromZero;
     this.ctx.font = "14px Calibri";
-
+    console.log(timelinePos);
     this.ctx.fillText(`- ${year} ${period} -`, this.xPos + 8, timelinePos);
-    this.ctx.fillStyle = country.toLowerCase() === "tibet" ? this.tibetEventTextColor : this.worldEventTextColor;
 
     this.ctx.fillText(`${title}`, this.xPos + 66, timelinePos);
   }

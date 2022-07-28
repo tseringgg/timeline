@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TimelineComponent } from './timeline/timeline.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
@@ -10,6 +11,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [MsalGuard]
+  },
+  {
+    path: 'timeline',
+    component: TimelineComponent
   },
   {
     path: '',
