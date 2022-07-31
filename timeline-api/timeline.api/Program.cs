@@ -57,6 +57,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
     .EnableTokenAcquisitionToCallDownstreamApi()
+
             .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
             //.AddDownstreamWebApi("DownstreamApi",builder.Configuration.GetSection("DownstreamApi")) 
             .AddInMemoryTokenCaches();
@@ -108,9 +109,10 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddCors(o => o.AddPolicy("default", builder =>
 {
-    builder.AllowAnyHeader()
+    builder
+    .AllowAnyOrigin()
     .AllowAnyMethod()
-    .AllowAnyOrigin();
+    .AllowAnyHeader();
 }));
 
 configureAutoMapper(builder);

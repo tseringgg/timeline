@@ -9,7 +9,8 @@
       "timeline.domain/1.0.0": {
         "dependencies": {
           "AutoMapper": "11.0.1",
-          "timeline.data": "1.0.0"
+          "timeline.data": "1.0.0",
+          "timeline.dto": "1.0.0"
         },
         "runtime": {
           "timeline.domain.dll": {}
@@ -1417,6 +1418,11 @@
         "runtime": {
           "timeline.data.dll": {}
         }
+      },
+      "timeline.dto/1.0.0": {
+        "runtime": {
+          "timeline.dto.dll": {}
+        }
       }
     }
   },
@@ -2400,6 +2406,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "timeline.data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "timeline.dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

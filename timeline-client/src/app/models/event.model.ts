@@ -1,3 +1,6 @@
 export class EventModel {
-  constructor(public id: number, public title: string, public era: string, public year: number){}
+  public isReviewed = false;
+  public isApproved = false;
+  constructor(public id: number, public title: string, public era: string,
+    public year: number){}
 }

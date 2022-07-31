@@ -25,3 +25,15 @@ C:\git\timeline.api\timeline.data\obj\Debug\net6.0\timeline.data.dll
 C:\git\timeline.api\timeline.data\obj\Debug\net6.0\refint\timeline.data.dll
 C:\git\timeline.api\timeline.data\obj\Debug\net6.0\timeline.data.pdb
 C:\git\timeline.api\timeline.data\obj\Debug\net6.0\ref\timeline.data.dll
+C:\git\timeline\timeline-api\timeline.data\bin\Debug\net6.0\timeline.data.deps.json
+C:\git\timeline\timeline-api\timeline.data\bin\Debug\net6.0\timeline.data.dll
+C:\git\timeline\timeline-api\timeline.data\bin\Debug\net6.0\timeline.data.pdb
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.csproj.AssemblyReference.cache
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.AssemblyInfoInputs.cache
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.AssemblyInfo.cs
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.csproj.CoreCompileInputs.cache
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.dll
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\refint\timeline.data.dll
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\timeline.data.pdb
+C:\git\timeline\timeline-api\timeline.data\obj\Debug\net6.0\ref\timeline.data.dll

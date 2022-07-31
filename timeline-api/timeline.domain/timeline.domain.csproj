@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\timeline.data\timeline.data.csproj" />
+    <ProjectReference Include="..\timeline.dto\timeline.dto.csproj" />
   </ItemGroup>
 
 </Project>

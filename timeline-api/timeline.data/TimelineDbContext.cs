@@ -22,5 +22,11 @@ namespace timeline.data
                 //   TrustServerCertificate=False;Authentication=Active Directory Integrated;")
             }
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Event>()
+                .HasIndex(b => new { b.Title, b.Era, b.Year })
+                .IsUnique();
+        }
     }
 }

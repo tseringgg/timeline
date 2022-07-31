@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using timeline.data;
+using timeline.dto;
 
 namespace timeline.domain
 {
@@ -6,7 +8,8 @@ namespace timeline.domain
     {
         public MappingProfile()
         {
-            //CreateMap<Artwork, ArtworkDto>();
+            CreateMap<Event, EventDto>();
+            CreateMap<EventDto, Event> ();
         }
     }
 }

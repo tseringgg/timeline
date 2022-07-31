@@ -29,6 +29,18 @@
     <td mat-cell *matCellDef="let element"> {{element.year}} </td>
   </ng-container>
 
+  <!-- IsReviewed Column -->
+  <ng-container matColumnDef="isReviewed">
+    <th mat-header-cell *matHeaderCellDef> isReviewed </th>
+    <td mat-cell *matCellDef="let element"> {{element.isReviewed}} </td>
+  </ng-container>
+
+  <!-- IsApproved Column -->
+  <ng-container matColumnDef="isApproved">
+    <th mat-header-cell *matHeaderCellDef> isApproved </th>
+    <td mat-cell *matCellDef="let element"> {{element.isApproved}} </td>
+  </ng-container>
+
   <!-- Delete Button -->
   <ng-container matColumnDef="delete">
     <th mat-cell *matHeaderCellDef></th>

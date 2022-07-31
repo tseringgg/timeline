@@ -11,7 +11,7 @@ import { EventDataService } from '../services/event-data.service';
 })
 export class EventListComponent implements OnInit, OnDestroy {
   events: EventModel[];
-  displayedColumns: string[] = ['title', 'era', 'year', 'delete'];
+  displayedColumns: string[] = ['title', 'era', 'year', 'delete', 'isReviewed', 'isApproved'];
   subs: Subscription[] = [];
 
   constructor(private eventDataService: EventDataService) { }

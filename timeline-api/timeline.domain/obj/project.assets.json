@@ -2234,6 +2234,16 @@
         "runtime": {
           "bin/placeholder/timeline.data.dll": {}
         }
+      },
+      "timeline.dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/timeline.dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/timeline.dto.dll": {}
+        }
       }
     }
   },
@@ -7604,12 +7614,18 @@
       "type": "project",
       "path": "../timeline.data/timeline.data.csproj",
       "msbuildProject": "../timeline.data/timeline.data.csproj"
+    },
+    "timeline.dto/1.0.0": {
+      "type": "project",
+      "path": "../timeline.dto/timeline.dto.csproj",
+      "msbuildProject": "../timeline.dto/timeline.dto.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper >= 11.0.1",
-      "timeline.data >= 1.0.0"
+      "timeline.data >= 1.0.0",
+      "timeline.dto >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7651,6 +7667,9 @@
           "projectReferences": {
             "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj": {
               "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.data\\timeline.data.csproj"
+            },
+            "C:\\git\\timeline\\timeline-api\\timeline.dto\\timeline.dto.csproj": {
+              "projectPath": "C:\\git\\timeline\\timeline-api\\timeline.dto\\timeline.dto.csproj"
             }
           }
         }
