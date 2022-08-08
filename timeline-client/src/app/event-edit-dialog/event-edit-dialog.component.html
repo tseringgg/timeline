@@ -1,0 +1,76 @@
+<mat-dialog-content>
+  <p>event-edit-dialog works!</p>
+  <form novalidate (ngSubmit)="save()" [formGroup]="eventEditForm">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label class="col-md-2 col-form-label" for="titleId">Title</label>
+        <input
+          class="form-control"
+          id="titleId"
+          type="text"
+          placeholder="Title (required)"
+          formControlName="title"
+          name="title"
+          [ngClass]="{
+            'is-invalid':
+              (eventEditForm.get('title').touched ||
+                eventEditForm.get('title').dirty) &&
+              !eventEditForm.get('title').valid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="eventEditForm.get('title').errors?.required">
+            Please enter the title.
+          </span>
+          <span *ngIf="eventEditForm.get('title').errors?.minlength">
+            The title must be longer than 3 characters.
+          </span>
+        </span>
+      </div>
+      <div class="col-md-4 flex-item">
+        <label class="col-md-2 col-form-label" for="eraId">Era</label>
+        <select class="form-select" formControlName="era">
+          <option value="AD">A.D.</option>
+          <option value="BC">B.C.</option>
+        </select>
+      </div>
+      <div class="col-md-4 flex-item">
+        <label class="col-md-2 col-form-label" for="yearId">Year</label>
+        <input
+          class="form-control"
+          id="yearId"
+          type="text"
+          placeholder="Year (required)"
+          formControlName="year"
+          name="year"
+          [ngClass]="{
+            'is-invalid':
+              (eventEditForm.get('year').touched ||
+                eventEditForm.get('year').dirty) &&
+              !eventEditForm.get('year').valid
+          }"
+        />
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+      <div class="col-md-2 mt-5">
+        <button
+          class="btn btn-primary mr-3"
+          type="submit"
+          style="width: 140px"
+          [title]="
+            eventEditForm.valid
+              ? 'Save your entered data'
+              : 'Disabled until the form data is valid'
+          "
+          [disabled]="!eventEditForm.valid || !eventEditForm.dirty"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

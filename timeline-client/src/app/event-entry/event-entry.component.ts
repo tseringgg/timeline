@@ -12,7 +12,6 @@ import { SessionService } from '../services/session.service';
 })
 export class EventEntryComponent implements OnInit {
   eventEntryForm: FormGroup;
-  selectedEra: string;
 
   constructor(private fb: FormBuilder, private eventDataService: EventDataService) { }
 
@@ -20,7 +19,7 @@ export class EventEntryComponent implements OnInit {
     this.eventEntryForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       era: ['', [Validators.required]],
-      year: ['', [Validators.pattern("^[0-9]+$")]]
+      year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]]
     });
   }
 

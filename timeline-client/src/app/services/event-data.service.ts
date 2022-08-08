@@ -22,6 +22,10 @@ export class EventDataService {
     //.pipe(tap(catchError(x => console.log(`Unexpected error: ${x}`))));
   }
 
+  patch(event: EventModel): Observable<any> {
+    return this._httpClient.patch(this.baseUrl, event);
+  }
+
   delete(id: number): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
     return this._httpClient.delete(url);

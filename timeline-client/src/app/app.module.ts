@@ -22,6 +22,7 @@ import { AuthInterceptorService } from './services/Http-interceptor.service';
 import { EventListComponent } from './event-list/event-list.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { AdminComponent } from './admin/admin.component';
+import { EventEditDialogComponent } from './event-edit-dialog/event-edit-dialog.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -35,7 +36,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     UnauthorizedComponent,
     EventListComponent,
     TimelineComponent,
-    AdminComponent
+    AdminComponent,
+    EventEditDialogComponent
   ],
   imports: [
     BrowserModule,
