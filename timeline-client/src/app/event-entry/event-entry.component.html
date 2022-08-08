@@ -65,8 +65,9 @@
                   : 'Disabled until the form data is valid'
               "
               [disabled]="!eventEntryForm.valid"
+              mat-dialog-close
             >
-              Save
+              Add
             </button>
           </div>
         </div>
@@ -79,6 +80,6 @@
   <br />Value: {{ eventEntryForm.value | json }}
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>
 

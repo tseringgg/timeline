@@ -34,5 +34,6 @@ export class EventEntryComponent implements OnInit {
             error: (err) => console.log(err),
             complete: () => {}
           })
+    //this.ngOnInit();
   }
 }

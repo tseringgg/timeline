@@ -55,7 +55,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr
     mat-row
-    (click)="openEditDialog(row)"
+    (dblclick)="openEditDialog(row)"
     *matRowDef="let row; columns: displayedColumns;"
   ></tr>
 

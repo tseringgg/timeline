@@ -10,7 +10,7 @@ import { EventDataService } from '../services/event-data.service';
 })
 
 export class EventEditDialogComponent implements OnInit {
-  @Input() eventData: EventModel;
+  eventData: EventModel;
   eventEditForm: FormGroup;
   constructor(private fb: FormBuilder, private eventDataService: EventDataService) { }
 
@@ -24,7 +24,8 @@ export class EventEditDialogComponent implements OnInit {
 
   save(): void {
     var formData = new EventModel(this.eventData.id, this.eventEditForm.get('title').value, this.eventEditForm.get('era').value, this.eventEditForm.get('year').value)
-    this.eventDataService.patch(formData)
+    this.eventData = formData;
+    this.eventDataService.patch(formData.id, formData)
           .subscribe({
             next: () => {
               this.eventDataService.onNewEntry(true);
@@ -32,6 +33,7 @@ export class EventEditDialogComponent implements OnInit {
             error: (err) => console.log(err),
             complete: () => {}
           })
+    this.ngOnInit();
   }
 
 }

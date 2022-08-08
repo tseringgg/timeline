@@ -52,7 +52,7 @@ namespace timeline.api.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, [FromBody] EventDto value)
         {
-            _repo.Patch(id, value.IsReviewed, value.IsApproved);
+            _repo.Patch(id, value);
 
             return Ok();
         }
