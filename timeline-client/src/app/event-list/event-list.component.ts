@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { config, Subscription } from 'rxjs';
+import { EventEditDialogComponent } from '../event-edit-dialog/event-edit-dialog.component';
 import { EventModel } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 
@@ -11,10 +13,11 @@ import { EventDataService } from '../services/event-data.service';
 })
 export class EventListComponent implements OnInit, OnDestroy {
   events: EventModel[];
+  selectedEvent: EventModel;
   displayedColumns: string[] = ['title', 'era', 'year', 'delete', 'isReviewed', 'isApproved'];
   subs: Subscription[] = [];
 
-  constructor(private eventDataService: EventDataService) { }
+  constructor(private eventDataService: EventDataService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -36,6 +39,17 @@ export class EventListComponent implements OnInit, OnDestroy {
             error: (err) => {},
             complete: () => {}
           })
+  }
+  openEditDialog(x: any): void {
+    console.log(x);
+    this.selectedEvent = x;
+    const dialogRef = this.dialog.open(EventEditDialogComponent);
+    dialogRef.disableClose = true;
+    dialogRef.componentInstance.eventData = x;
+    //dialogRef.componentInstance.ngOnInit();
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Edit Dialog was closed.")
+    })
   }
 
   getSampleEvents(){

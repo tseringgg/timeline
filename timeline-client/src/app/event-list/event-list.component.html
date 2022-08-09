@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
-<div>EventList</div>
+<!-- <div>EventList</div> -->
 <!-- <div>{{ events | json }}</div> -->
 <div class="col-md-4">
 
@@ -53,7 +53,11 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr
+    mat-row
+    (dblclick)="openEditDialog(row)"
+    *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
 
 </table>
 

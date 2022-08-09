@@ -61,7 +61,7 @@ namespace timeline.domain.Repo
                 dbContext.SaveChanges();
             }
         }
-        public void Patch(int eventId, bool isReviewed, bool isApproved)
+        public void Patch(int eventId, EventDto changedEvent)
         {
             using (var dbContext = new TimelineDbContext())
             {
@@ -71,8 +71,12 @@ namespace timeline.domain.Repo
                 {
                     throw new KeyNotFoundException();
                 }
-                dbEntity.IsReviewed = isReviewed;
-                dbEntity.IsApproved = isApproved;
+
+                dbEntity.Title = changedEvent.Title;
+                dbEntity.Era = changedEvent.Era;
+                dbEntity.Year = changedEvent.Year;
+                dbEntity.IsReviewed = changedEvent.IsReviewed;
+                dbEntity.IsApproved = changedEvent.IsApproved;
                 dbContext.SaveChanges();
             }
         }

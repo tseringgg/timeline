@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EventEntryComponent } from '../event-entry/event-entry.component';
+import { EventListComponent } from '../event-list/event-list.component';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+  public dialogId: string;
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EventEntryComponent);
+
+    dialogRef.disableClose = true;
+    //this.dialogId = dialogRef.id;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
