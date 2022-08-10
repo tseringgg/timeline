@@ -23,6 +23,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { AdminComponent } from './admin/admin.component';
 import { EventEditDialogComponent } from './event-edit-dialog/event-edit-dialog.component';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -54,7 +55,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: '8e8031e0-4716-4505-975b-e09c35744ab1',
         authority: 'https://login.microsoftonline.com/9253a53e-dae7-4db4-81b3-2aef2329d070',
-        redirectUri: 'http://localhost:4200/'
+        redirectUri: environment.oAuthSettings.redirectUri
       },
       cache: {
         cacheLocation: 'localStorage',
