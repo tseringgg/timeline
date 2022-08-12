@@ -22,6 +22,7 @@ namespace timeline.api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            //return Ok(new string[] { "event1", "event2"});
             return Ok(_repo.GetAll());
         }
 
