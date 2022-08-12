@@ -28,7 +28,7 @@ export const environment: IEnvironment = {
 
     authority: 'https://login.microsoftonline.com/9253a53e-dae7-4db4-81b3-2aef2329d070',
 
-    redirectUri: 'https://timelinesoftibet.azurewebsites.net/', //'http://localhost:4200',
+    redirectUri: 'https://green-mushroom-04b7a2810.1.azurestaticapps.net/', //'http://localhost:4200',
 
     scopes: ['user.read']
 
