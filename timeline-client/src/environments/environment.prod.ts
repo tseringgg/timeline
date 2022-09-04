@@ -12,11 +12,11 @@ import { IEnvironment } from "./ienvironment";
 
 export const environment: IEnvironment = {
 
-  name: 'local',
+  name: 'production',
 
   production: true,
 
-  rootApiUrl: 'https://timelinesoftibet.azurewebsites.net/', //'http://localhost:24568/',
+  rootApiUrl: 'https://timelinesoftibet.azurewebsites.net/',
 
   apiScopes: ['api://6c06d05c-9be0-4236-957e-37e364ffd593/access_api_as_user'],
 
@@ -28,7 +28,7 @@ export const environment: IEnvironment = {
 
     authority: 'https://login.microsoftonline.com/9253a53e-dae7-4db4-81b3-2aef2329d070',
 
-    redirectUri: 'https://green-mushroom-04b7a2810.1.azurestaticapps.net/', //'http://localhost:4200',
+    redirectUri: 'https://green-mushroom-04b7a2810.1.azurestaticapps.net/',
 
     scopes: ['user.read']
 

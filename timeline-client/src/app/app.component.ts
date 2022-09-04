@@ -11,7 +11,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'msal-angular-tutorial';
+  title = 'Tibet History Timeline';
   isIframe = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
