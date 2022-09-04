@@ -39,7 +39,8 @@ using timeline.domain;
 using Microsoft.AspNetCore.Authentication; 
 using Microsoft.AspNetCore.Authentication.JwtBearer; 
 using Microsoft.Identity.Web; 
-using Microsoft.OpenApi.Models;   
+using Microsoft.OpenApi.Models;
+using timeline.data;
 
 var configureAutoMapper = (WebApplicationBuilder builder) =>
 {
@@ -53,6 +54,9 @@ var configureAutoMapper = (WebApplicationBuilder builder) =>
 };
 
 var builder = WebApplication.CreateBuilder(args);
+
+//builder.Services.AddDbContext<TimelineDbContext>((options, context) => context.UseInMemoryDatabase(new Guid().ToString()));
+
 // Add services to the container. 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
