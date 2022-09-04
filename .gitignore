@@ -10,3 +10,5 @@ bin
 obj
 packages
 /timeline-api/.vs/timeline.api/FileContentIndex
+/timeline-api/.vs/timeline.api/config/applicationhost.config
+/timeline-api/.vs/timeline.api/DesignTimeBuild/.dtbcache.v2
