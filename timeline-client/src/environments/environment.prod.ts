@@ -18,13 +18,13 @@ export const environment: IEnvironment = {
 
   rootApiUrl: 'https://timelinesoftibet.azurewebsites.net/',
 
-  apiScopes: ['api://6c06d05c-9be0-4236-957e-37e364ffd593/access_api_as_user'],
+  apiScopes: ['api://0039e470-7904-4a72-9409-9e18cbc3f776/access_api_as_user'],
 
   graphBaseUri: 'https://graph.microsoft.com/v1.0',
 
   oAuthSettings: {
 
-    clientId: '8e8031e0-4716-4505-975b-e09c35744ab1',
+    clientId: '5c7983c4-032d-442b-b8ad-286af581a540',
 
     authority: 'https://login.microsoftonline.com/9253a53e-dae7-4db4-81b3-2aef2329d070',
 

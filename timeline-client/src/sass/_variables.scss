@@ -1,0 +1,123 @@
+@use '../../node_modules/@angular/material' as mat;
+@include mat.core();
+
+$mat-primary: (
+    50 : #e8e7e5,
+    100 : #c5c2be,
+    200 : #9f9a93,
+    300 : #787268,
+    400 : #5b5347,
+    500 : #3e3527,
+    600 : #383023,
+    700 : #30281d,
+    800 : #282217,
+    900 : #1b160e,
+    A100 : #ffbe5d,
+    A200 : #ffaa2a,
+    A400 : #f69400,
+    A700 : #dd8500,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-accent: (
+    50 : #e6eaec,
+    100 : #c1c9cf,
+    200 : #98a6af,
+    300 : #6e828e,
+    400 : #4f6776,
+    500 : #304c5e,
+    600 : #2b4556,
+    700 : #243c4c,
+    800 : #1e3342,
+    900 : #132431,
+    A100 : #71bbff,
+    A200 : #3ea2ff,
+    A400 : #0b8aff,
+    A700 : #007df1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$warn-palette: (
+    50 : #fff1eb,
+    100 : #fedccd,
+    200 : #fdc5ac,
+    300 : #fcae8b,
+    400 : #fc9c72,
+    500 : #fb8b59,
+    600 : #fa8351,
+    700 : #fa7848,
+    800 : #f96e3e,
+    900 : #f85b2e,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffdcd3,
+    A700 : #ffc7b9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+/* Define dark theme */
+$primary-dark: mat.define-palette($mat-primary, 300);
+$accent-dark: mat.define-palette($mat-accent, A200, A100, A400);
+$warn-dark: mat.define-palette($warn-palette);
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary:$primary-dark,
+    accent:$accent-dark,
+    warn:$warn-dark
+  )
+));
+@include mat.all-component-themes($dark-theme);
+
+$body-background-color: mat.get-color-from-palette($mat-primary, 900);
+$main-panel-background-color: mat.get-color-from-palette($mat-primary, 700);
+$navbar-background-color: mat.get-color-from-palette($mat-primary, 600);
+$navbar-border-color: mat.get-color-from-palette($mat-primary, 400);
+$main-panel-content-background-color: mat.get-color-from-palette($mat-primary, 500);

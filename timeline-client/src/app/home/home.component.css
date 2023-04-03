@@ -1,0 +1,9 @@
+.loginsuccess_message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-container {
+  margin-top: 1rem;
+}

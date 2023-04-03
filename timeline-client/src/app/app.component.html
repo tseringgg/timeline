@@ -1,15 +1,29 @@
-<mat-toolbar color="primary">
-  <a class="title" href="/">{{ title }}</a>
 
-  <div class="toolbar-spacer"></div>
-  <a mat-button [routerLink]="['admin']">Admin</a>
-  <a mat-button [routerLink]="['profile']">Profile</a>
+<div class="app-container">
+  <mat-toolbar class="navbar">
+    <div class="toolbar-spacer"></div>
+    <a mat-button [routerLink]="['admin']">Admin</a>
+    <a mat-button [routerLink]="['profile']">Profile</a>
 
-  <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
-  <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+    <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+    <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+  </mat-toolbar>
 
-</mat-toolbar>
-<div class="container">
-  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-  <router-outlet *ngIf="!isIframe"></router-outlet>
+
+  <div class="main-panel">
+    <div class="logo-container" >
+      <a href="/">
+        <img class="logo" src="assets/2X2 ylylogo.png" />
+      </a>
+      <!-- <span class="title">{{ title }}</span> -->
+    </div>
+    <div class="container">
+      <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+      <router-outlet *ngIf="!isIframe"></router-outlet>
+    </div>
+
+  </div>
+
 </div>
+
+

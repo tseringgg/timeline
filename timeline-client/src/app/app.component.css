@@ -1,7 +1,26 @@
+.app-container {
+  display: grid;
+  place-items: center;
+}
+
 .toolbar-spacer {
   flex: 1 1 auto;
 }
 
-a.title {
+/* span.title {
   color: white;
+  font-size: 2rem;
+  opacity: 0.5;
+  font-weight: 600;
+} */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  width: 16rem;
+  margin-top: .5rem;
+  filter: drop-shadow(0.15rem 0.15rem 0.4rem rgba(0, 0, 0, 0.5));
 }
