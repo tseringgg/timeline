@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3a6db945-41de-4f56-a6fe-f234e415d878": {
+      "ProjectGuid": "3a6db945-41de-4f56-a6fe-f234e415d878",
+      "DisplayName": "timeline.api",
+      "ColorIndex": 0
+    },
+    "0e5d8828-20a1-431b-a431-a967533e9453": {
+      "ProjectGuid": "0e5d8828-20a1-431b-a431-a967533e9453",
+      "DisplayName": "timeline.data",
+      "ColorIndex": 1
+    },
+    "6f79e329-f6cd-4347-9979-df826beb2992": {
+      "ProjectGuid": "6f79e329-f6cd-4347-9979-df826beb2992",
+      "DisplayName": "timeline.domain",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

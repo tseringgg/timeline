@@ -41,6 +41,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web; 
 using Microsoft.OpenApi.Models;
 using timeline.data;
+using timeline.api.constants;
 
 var configureAutoMapper = (WebApplicationBuilder builder) =>
 {
@@ -68,11 +69,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("User", policy =>
+    options.AddPolicy(PolicyNames.ReadOnlyUser, policy =>
     {
         policy.RequireAssertion(ctx =>
         {
-            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "Basic_User");
+            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readonly_user");
+            return f != null;
+        });
+    });
+
+    options.AddPolicy(PolicyNames.ReadWriteUser, policy =>
+    {
+        policy.RequireAssertion(ctx =>
+        {
+            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readwrite_user");
+            return f != null;
+        });
+    });
+
+    options.AddPolicy(PolicyNames.Administrator, policy =>
+    {
+        policy.RequireAssertion(ctx =>
+        {
+            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_admin");
             return f != null;
         });
     });
@@ -129,9 +148,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-    app.UseSwagger();
-    app.UseSwaggerUI();
 
 app.UseCors("default");
 app.UseHttpsRedirection();

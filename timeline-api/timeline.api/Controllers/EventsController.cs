@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using timeline.api.constants;
 using timeline.domain.Repo;
 using timeline.dto;
 
@@ -18,15 +19,13 @@ namespace timeline.api.Controllers
         {
             _repo = new EventRepo(mapper);
         }
-        // GET: api/<EventsController>
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(new string[] { "event1", "event2"});
-            //return Ok(_repo.GetAll());
+            return Ok(_repo.GetAll());
         }
 
-        // GET api/<EventsController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -40,8 +39,8 @@ namespace timeline.api.Controllers
             }
         }
 
-        // POST api/<EventsController>
         [HttpPost]
+        [Authorize(Policy = PolicyNames.Administrator)]
         public IActionResult Post([FromBody] EventDto value)
         {
             _repo.Create(value);
@@ -49,8 +48,8 @@ namespace timeline.api.Controllers
             return Ok();
         }
 
-        // PATCH api/<EventsController>/5
         [HttpPatch("{id}")]
+        [Authorize(Policy = PolicyNames.Administrator)]
         public IActionResult Patch(int id, [FromBody] EventDto value)
         {
             _repo.Patch(id, value);
@@ -58,8 +57,8 @@ namespace timeline.api.Controllers
             return Ok();
         }
 
-        // DELETE api/<EventsController>/5
         [HttpDelete("{id}")]
+        [Authorize(Policy = PolicyNames.Administrator)]
         public IActionResult Delete(int id)
         {
             _repo.Delete(id);
