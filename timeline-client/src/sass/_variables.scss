@@ -2,72 +2,72 @@
 @include mat.core();
 
 $mat-primary: (
-    50 : #e8e7e5,
-    100 : #c5c2be,
-    200 : #9f9a93,
-    300 : #787268,
-    400 : #5b5347,
-    500 : #3e3527,
-    600 : #383023,
-    700 : #30281d,
-    800 : #282217,
-    900 : #1b160e,
-    A100 : #ffbe5d,
-    A200 : #ffaa2a,
-    A400 : #f69400,
-    A700 : #dd8500,
+  50 : #e8e8e8,
+  100 : #c6c6c6,
+  200 : #a1a0a0,
+  300 : #7b7979,
+  400 : #5e5d5d,
+  500 : #424040,
+  600 : #3c3a3a,
+  700 : #333232,
+  800 : #2b2a2a,
+  900 : #1d1c1c,
+  A100 : #f29975,
+  A200 : #ee8047,
+  A400 : #ff6602,
+  A700 : #e85e00,
     contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #ffffff,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #ffffff,
+      A400 : #ffffff,
+      A700 : #ffffff,
     )
 );
 
 $mat-accent: (
-    50 : #e6eaec,
-    100 : #c1c9cf,
-    200 : #98a6af,
-    300 : #6e828e,
-    400 : #4f6776,
-    500 : #304c5e,
-    600 : #2b4556,
-    700 : #243c4c,
-    800 : #1e3342,
-    900 : #132431,
-    A100 : #71bbff,
-    A200 : #3ea2ff,
-    A400 : #0b8aff,
-    A700 : #007df1,
+  50 : #f6fdec,
+  100 : #e9fbd0,
+  200 : #dbf9b0,
+  300 : #ccf690,
+  400 : #c1f479,
+  500 : #b6f261,
+  600 : #aff059,
+  700 : #a6ee4f,
+  800 : #9eec45,
+  900 : #8ee833,
+  A100 : #ffffff,
+  A200 : #fdfffb,
+  A400 : #e2ffc8,
+  A700 : #d5ffae,
     contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #ffffff,
-        A700 : #ffffff,
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
     )
 );
 
-$warn-palette: (
+$mat-warn: (
     50 : #fff1eb,
     100 : #fedccd,
     200 : #fdc5ac,
@@ -105,7 +105,7 @@ $warn-palette: (
 /* Define dark theme */
 $primary-dark: mat.define-palette($mat-primary, 300);
 $accent-dark: mat.define-palette($mat-accent, A200, A100, A400);
-$warn-dark: mat.define-palette($warn-palette);
+$warn-dark: mat.define-palette($mat-warn);
 
 $dark-theme: mat.define-dark-theme((
   color: (
@@ -116,8 +116,14 @@ $dark-theme: mat.define-dark-theme((
 ));
 @include mat.all-component-themes($dark-theme);
 
-$body-background-color: mat.get-color-from-palette($mat-primary, 900);
+$body-background-color: mat.get-color-from-palette($mat-primary, 600);
 $main-panel-background-color: mat.get-color-from-palette($mat-primary, 700);
 $navbar-background-color: mat.get-color-from-palette($mat-primary, 600);
 $navbar-border-color: mat.get-color-from-palette($mat-primary, 400);
 $main-panel-content-background-color: mat.get-color-from-palette($mat-primary, 500);
+
+$body-text-color:mat.get-color-from-palette($mat-accent,700);
+$text-color-gold:mat.get-color-from-palette($mat-accent,A100);
+$sub-text-color:mat.get-color-from-palette($mat-primary,200);
+
+$event-title-text: mat.get-color-from-palette($mat-accent,200);

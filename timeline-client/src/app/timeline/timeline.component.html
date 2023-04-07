@@ -1,29 +1,16 @@
-<div *ngIf="isReady" class="timeline">
-  <div>{{ eventsList | json }}</div><div>canvasHeight {{ canvasHeight }}</div>
-  <canvas #myCanvas id="canvas" [height]="canvasHeight" width="1000"></canvas>
-</div>
-
 
 <mat-card class="main-panel-content">
-  <mat-card-title>
-    <div class="title">
-      <h2>Tibet History Timeline</h2>
-    </div>
-  </mat-card-title>
-  <mat-card-subtitle>
-    <div class="prehistoric-data">
-      <h4>Prehistoric Scientific Data</h4>
-      <ul>
-        <li>Denisovans roamed Tibet 150,000 years ago</li>
-        <li>Modern humans roamed Tibet 50,000 years ago</li>
-      </ul>
-    </div>
-  </mat-card-subtitle>
   <mat-card-content>
-    <div class="legend">
-      <span class="legend-header">Legend:</span>
-      <span class="legend-tibet">Tibet Events |</span>
-      <span class="legend-world">World Events</span>
-      </div>
+    <ul class="legend nav">
+      <li class="legend-header">Legend:</li>
+      <li class="legend-tibet">Tibet Events |&nbsp;</li>
+      <li class="legend-world">World Events</li>
+    </ul>
   </mat-card-content>
 </mat-card>
+
+<div *ngIf="isReady" class="timeline">
+  <!-- <div>{{ eventsList | json }}</div><div>canvasHeight {{ canvasHeight }}</div> -->
+  <canvas #myCanvas id="canvas" [height]="canvasHeight" [width]="canvasWidth"></canvas>
+</div>
+

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, pipe, Subject, tap } from "rxjs";
+import { catchError, Observable, of, pipe, Subject, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { EventModel } from "../models/event.model";
 
@@ -14,7 +14,20 @@ export class EventDataService {
   newEventEntrySubmitSubject$ = this.newEventEntrySubmittedSubject as Observable<boolean>;
 
   get(): Observable<EventModel[]> {
-    return this._httpClient.get<EventModel[]>(this.baseUrl);
+    // return this._httpClient.get<EventModel[]>(this.baseUrl);
+
+    const eventsList = [
+          new EventModel(1, "Death of Bob", "AD", 124),
+          new EventModel(2, "hfeianfeja", "BC", 111),
+          new EventModel(3, "Birth of Christ aflj alsfj adfljl adflj adsflj asdfl", "BC", 840),
+          new EventModel(4, "Birth of Christ", "BC", 1234),
+          new EventModel(5, "Birth of Christ", "BC", 2015),
+          new EventModel(5, "Birth of Christ", "AD", 2015),
+          new EventModel(5, "Jarl Borg was born", "AD", 1841),
+          new EventModel(5, "Hogan Logan was born", "AD", 1847),
+        ];
+
+    return of(eventsList);
   }
 
   create(event: EventModel): Observable<any> {

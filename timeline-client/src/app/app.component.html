@@ -1,23 +1,37 @@
 
 <div class="app-container">
-  <mat-toolbar class="navbar">
-    <div class="toolbar-spacer"></div>
-    <a mat-button [routerLink]="['admin']">Admin</a>
-    <a mat-button [routerLink]="['profile']">Profile</a>
+  <div class="navbar">
+    <mat-toolbar>
+      <div class="toolbar-spacer"></div>
+      <a mat-button [routerLink]="['admin']">Admin</a>
+      <a mat-button [routerLink]="['profile']">Profile</a>
 
-    <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
-    <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
-  </mat-toolbar>
+      <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+      <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+    </mat-toolbar>
+  </div>
 
 
   <div class="main-panel">
     <div class="logo-container" >
-      <a href="/">
+      <a href="/" routerLink="/timeline">
         <img class="logo" src="assets/2X2 ylylogo.png" />
       </a>
-      <!-- <span class="title">{{ title }}</span> -->
+      <div>
+        <h2>Tibet History Timeline</h2>
+      </div>
+      <!-- <i class="fa-solid fa-tags"></i> -->
+
+      <!-- <i class="fa-solid fa-lightbulb-exclamation-on"></i> -->
+      <mat-icon id="lightbulb">wb_incandescent</mat-icon>
+      <ul class="prehistory-data">
+        <li>Denisovans roamed Tibet 150,000 years ago</li>
+        <li>&nbsp;|&nbsp;</li>
+        <li>Modern humans roamed Tibet 50,000 years ago</li>
+      </ul>
     </div>
-    <div class="container">
+
+    <div>
       <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
       <router-outlet *ngIf="!isIframe"></router-outlet>
     </div>

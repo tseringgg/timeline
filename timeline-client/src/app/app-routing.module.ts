@@ -5,9 +5,15 @@ import { AdminComponent } from './admin/admin.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TimelineComponent } from './timeline/timeline.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
+  {
+    path: 'timeline',
+    component: TimelineComponent,
+    canActivate: [MsalGuard]
+  },
   {
     path: 'profile',
     component: ProfileComponent,

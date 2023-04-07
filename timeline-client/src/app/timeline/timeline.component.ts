@@ -18,36 +18,37 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   public context: CanvasRenderingContext2D;
   ctx: CanvasRenderingContext2D;
 
-  readonly verticalLineColor = "black";
-  readonly timelineColor = "seagreen";
+  readonly verticalLineColor = "yellow";
+  readonly timelineColor = "goldenrod";
   readonly eventTextColor = "black";
 
   readonly tibetEventsHeader = "Tibet Events";
   readonly worldEventsHeader = "World Events";
 
-  readonly tibetEventTextColor = "black";
+  readonly tibetEventTextColor = "white";
   readonly worldEventTextColor = "firebrick";
 
   readonly timeGapPixels = 130;
   readonly verticalStartPos = 70;
 
   /* Events */
-  xPos = 70;
-  yPos = this.verticalStartPos;
+  xPos = 120; // vertical line left Pos
+  yPos = this.verticalStartPos; // vertical line top pos
   labelPos = 70;
   readonly timeIncrement = this.timeGapPixels;
   earliestCentury = -5;
   latestCentury = 3;
   canvasHeight = 0;
 
+  canvasWidth = (window.innerWidth / 100) * 65; //1300;
+
   /* Date Unit */
   readonly xPosLabel = 0;
-  yPosLabel = this.verticalStartPos;
-  readonly dateIncrement = this.timeGapPixels;
+  yPosLabel = this.verticalStartPos;  readonly dateIncrement = this.timeGapPixels;
 
   readonly eventHeaderXPos = 20;
 
-  horizontalLineLength = 600;
+  horizontalLineLength = (window.innerWidth / 100) * 55;
 
   isReady = false;
 
@@ -81,7 +82,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
               // this.drawTimelines();
               setTimeout(() => this.drawTimelines(), 0);
             }
-          })
+          });
   }
 
   drawTimelines(): void {
@@ -107,13 +108,13 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.ctx.stroke();
   }
 
-  getSampleEvents(){
-    this.eventsList = [
-      new EventModel(1, "Death of Bob", "AD", 124),
-      new EventModel(2, "hfeianfeja", "BC", 111),
-      new EventModel(3, "Birth of Christ", "BC", 800)
-    ]
-  }
+  // getSampleEvents(){
+  //   this.eventsList = [
+  //     new EventModel(1, "Death of Bob", "AD", 124),
+  //     new EventModel(2, "hfeianfeja", "BC", 111),
+  //     new EventModel(3, "Birth of Christ", "BC", 800)
+  //   ]
+  // }
 
   calculateCanvasDimensions(list: EventModel[]): void {
     let yearList = new Array<Number>(list.length);
@@ -180,6 +181,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.ctx.fillStyle = this.circleColors[colorId];
     this.ctx.fill();
 
+    this.ctx.strokeStyle = this.verticalLineColor;
+    // this.ctx.setLineDash([3, 15]);
     this.ctx.lineTo(this.horizontalLineLength, this.yPos);
     this.ctx.stroke();
   }
@@ -191,7 +194,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   drawVerticalLine(): void {
     this.moveToBaseLine();
     this.ctx.lineWidth = .3;
-    this.ctx.fillStyle = this.verticalLineColor;
+    // this.ctx.fillStyle = this.verticalLineColor;
+    this.ctx.strokeStyle = this.verticalLineColor;
     this.ctx.lineTo(this.xPos, this.yPos);
   }
 
@@ -226,10 +230,12 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     }
 
     let timelinePos = relativeZero + displacementFromZero;
-    this.ctx.font = "14px Calibri";
-    //console.log(timelinePos);
-    this.ctx.fillText(`- ${year} ${period} -`, this.xPos + 8, timelinePos);
+    this.ctx.font = "16px Calibri";
 
-    this.ctx.fillText(`${title}`, this.xPos + 66, timelinePos);
+    //console.log(timelinePos);
+    this.ctx.fillStyle = "silver";
+    this.ctx.fillText(`------${year} ${period} -`, this.xPos + 8, timelinePos);
+/** Get char count */
+    this.ctx.fillText(`${title}`, this.xPos + 100, timelinePos);
   }
 }
