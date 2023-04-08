@@ -23,7 +23,7 @@ export class EventEditDialogComponent implements OnInit {
   }
 
   save(): void {
-    var formData = new EventModel(this.eventData.id, this.eventEditForm.get('title').value, this.eventEditForm.get('era').value, this.eventEditForm.get('year').value)
+    var formData = new EventModel(this.eventData.id, this.eventEditForm.get('title').value, this.eventEditForm.get('era').value, this.eventEditForm.get('year').value, this.eventEditForm.get('country').value)
     this.eventData = formData;
     this.eventDataService.patch(formData.id, formData)
           .subscribe({

@@ -17,14 +17,17 @@ export class EventDataService {
     // return this._httpClient.get<EventModel[]>(this.baseUrl);
 
     const eventsList = [
-          new EventModel(1, "Death of Bob", "AD", 124),
-          new EventModel(2, "hfeianfeja", "BC", 111),
-          new EventModel(3, "Birth of Christ aflj alsfj adfljl adflj adsflj asdfl", "BC", 840),
-          new EventModel(4, "Birth of Christ", "BC", 1234),
-          new EventModel(5, "Birth of Christ", "BC", 2015),
-          new EventModel(5, "Birth of Christ", "AD", 2015),
-          new EventModel(5, "Jarl Borg was born", "AD", 1841),
-          new EventModel(5, "Hogan Logan was born", "AD", 1847),
+          new EventModel(1, "Birth of Jesus", "", 0, "Jerusalem"),
+          new EventModel(2, "Birth of Buddha", "BC", 564, "India"),
+          new EventModel(3, "Birth of Guru Padmasambhava", "AD", 717, "India"),
+          new EventModel(4, "Birth of Je Tsongkhapa", "AD", 1357, "Tibet"),
+          new EventModel(5, "Birth of 14th Dalai Lama", "AD", 1935, "Tibet"),
+          new EventModel(6, "Birth of Songtsen Gampo", "AD", 617, "Tibet"),
+          new EventModel(7, "Birth of Nyamme Sherab Gyaltsen", "AD", 1356, "Tibet"),
+          new EventModel(8, "Birth of Sachen Kunga Nyingpo", "AD", 1092, "Tibet"),
+          new EventModel(9, "Birth of Garab Dorje", "AD", 665, "Tibet"),
+          new EventModel(9, "Birth of Nyatri Tsenpo", "BC", 127, "Tibet"),
+          // new EventModel(9, "Birth of Bon Buddha Tonpa Shenrab", "BC", 16016, "Tibet"),
         ];
 
     return of(eventsList);

@@ -8,7 +8,7 @@ import { EventDataService } from '../services/event-data.service';
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css']
 })
-export class TimelineComponent implements OnInit, AfterViewInit {
+export class TimelineComponent implements OnInit {
   title = 'drawgraph';
   eventsList: EventModel[];
   subs: Subscription[] = [];
@@ -32,7 +32,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   readonly verticalStartPos = 70;
 
   /* Events */
-  xPos = 120; // vertical line left Pos
+  windowWidthUnit = window.innerWidth / 100;
+  canvasWidth = this.windowWidthUnit * 65; //1300;
+
+
+  xPos = this.canvasWidth / 2; /// vertical line left Pos
   yPos = this.verticalStartPos; // vertical line top pos
   labelPos = 70;
   readonly timeIncrement = this.timeGapPixels;
@@ -40,17 +44,23 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   latestCentury = 3;
   canvasHeight = 0;
 
-  canvasWidth = (window.innerWidth / 100) * 65; //1300;
+
 
   /* Date Unit */
-  readonly xPosLabel = 0;
+  readonly xPosLabel =  this.windowWidthUnit * 5;
   yPosLabel = this.verticalStartPos;  readonly dateIncrement = this.timeGapPixels;
 
   readonly eventHeaderXPos = 20;
 
-  horizontalLineLength = (window.innerWidth / 100) * 55;
+  horizontalLineLength = (this.xPos + this.xPos) - 200; //(window.innerWidth / 100) * 35;
 
   isReady = false;
+
+  xPos_tibetHeading = this.xPos - (this.windowWidthUnit * 20);
+  yPos_tibetHeading = 50;
+
+  xPos_worldHeading = this.xPos - (this.windowWidthUnit * -10);
+  yPos_worldHeading = 50;
 
   circleColors = [
     "navajowhite", "yellow", "lightpink", "peachpuff", "aquamarine", "aqua", "lightgreen", "lightblue", "lavender", "thistle"
@@ -59,12 +69,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getEvents();
-    //this.getSampleEvents();
-  }
-
-  ngAfterViewInit(): void {
-    //this.getEvents();
-    // this.drawTimelines();
   }
 
   getEvents() {
@@ -73,31 +77,34 @@ export class TimelineComponent implements OnInit, AfterViewInit {
             next: (data) => {
               this.isReady = true;
               this.eventsList = data;
-            //  this.drawTimelines();
              this.calculateCanvasDimensions(this.eventsList);
              this.setCanvasHeight();
             },
             error: (err) => {},
             complete: () => {
-              // this.drawTimelines();
               setTimeout(() => this.drawTimelines(), 0);
             }
           });
   }
 
+  writeCountryHeaders(): void {
+    this.ctx.beginPath();
+    this.ctx.fillStyle = 'orange';
+    this.ctx.font = "24px Calibri";
+
+    this.ctx.fillText(`Tibet`, this.xPos_tibetHeading, this.yPos_tibetHeading);
+    this.ctx.fillText(`World`, this.xPos_worldHeading, this.yPos_worldHeading);
+  }
+
   drawTimelines(): void {
-
-
-    //this.ctx.beginPath();
-    //this.moveToBaseLine();
-    // this.calculateCanvasDimensions(this.eventsList);
-    // this.setCanvasHeight();
 
     if (!this.myCanvas) {
       return;
     }
 
     this.ctx = this.myCanvas?.nativeElement.getContext('2d');
+
+    this.writeCountryHeaders();
 
     this.drawTimelineLabels();
 
@@ -107,14 +114,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
     this.ctx.stroke();
   }
-
-  // getSampleEvents(){
-  //   this.eventsList = [
-  //     new EventModel(1, "Death of Bob", "AD", 124),
-  //     new EventModel(2, "hfeianfeja", "BC", 111),
-  //     new EventModel(3, "Birth of Christ", "BC", 800)
-  //   ]
-  // }
 
   calculateCanvasDimensions(list: EventModel[]): void {
     let yearList = new Array<Number>(list.length);
@@ -149,18 +148,17 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     } else if(latestYear >= 0) {
       this.latestCentury = Math.ceil(latestYear / 100);
     }
-    // this.setCanvasHeight();
   }
 
   setCanvasHeight() {
     this.canvasHeight = (this.latestCentury - this.earliestCentury) * this.timeGapPixels + this.verticalStartPos * 2;
-    //console.log(this.canvasHeight);
   }
 
   drawTimelineLabels(): void {
     for(let i = this.earliestCentury; i <= this.latestCentury; i++){
       let period;
       this.drawCircle();
+      this.drawHorizontalCenturyLine();
       this.drawVerticalLine();
       if(i < 0) {
         period = "BC";
@@ -180,11 +178,31 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     const colorId = Math.floor(Math.random() * 10);
     this.ctx.fillStyle = this.circleColors[colorId];
     this.ctx.fill();
-
-    this.ctx.strokeStyle = this.verticalLineColor;
-    // this.ctx.setLineDash([3, 15]);
-    this.ctx.lineTo(this.horizontalLineLength, this.yPos);
+        this.ctx.strokeStyle = this.verticalLineColor;
     this.ctx.stroke();
+
+    // this.ctx.strokeStyle = this.verticalLineColor;
+    // // this.ctx.setLineDash([3, 15]);
+    // this.ctx.lineTo(this.horizontalLineLength, this.yPos);
+    // this.ctx.stroke();
+
+    // /** Draw horizontal century line for Tibet timelines */
+    // this.ctx.lineTo(this.xPos - 500, this.yPos);
+  }
+
+  drawHorizontalCenturyLine(): void {
+    // this.moveToBaseLine();
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "white";
+    this.ctx.lineWidth = .8;
+    this.ctx.moveTo(this.xPosLabel + this.windowWidthUnit * 3, this.yPosLabel);
+    this.ctx.lineTo(this.xPosLabel + this.windowWidthUnit * 50, this.yPosLabel);
+    this.ctx.setLineDash([5, 10]);
+
+    this.ctx.stroke();
+
+    /** Reset back to solid line */
+    this.ctx.setLineDash([]);
   }
 
   moveToBaseLine(): void {
@@ -212,9 +230,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.ctx.font = "16px Calibri";
 
     if (+dateLabel == 0) {
-      this.ctx.fillText(`${dateLabel}`, this.xPosLabel + 35, this.yPosLabel + 5);
+      this.ctx.fillText(`${dateLabel}`, this.xPosLabel, this.yPosLabel + 5);
+      // this.ctx.fillText(`${dateLabel}`, this.xPosLabel + 485, this.yPosLabel + 5);
     } else {
       this.ctx.fillText(`${dateLabel} ${period} `, this.xPosLabel, this.yPosLabel + 5);
+      // this.ctx.fillText(`${dateLabel} ${period} `, this.xPosLabel + 485, this.yPosLabel + 5);
     }
   }
 
@@ -232,10 +252,24 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     let timelinePos = relativeZero + displacementFromZero;
     this.ctx.font = "16px Calibri";
 
-    //console.log(timelinePos);
+    // let xPos_yearPeriodText = this.xPos + 8;
+    // let yPos_yearPeriodText = timelinePos;
+    let xPos_titleText = this.xPos + 100;
+    let yPos_titleText = timelinePos;
     this.ctx.fillStyle = "silver";
-    this.ctx.fillText(`------${year} ${period} -`, this.xPos + 8, timelinePos);
-/** Get char count */
-    this.ctx.fillText(`${title}`, this.xPos + 100, timelinePos);
+
+    if (entry.country === "Tibet") {
+      this.ctx.fillStyle = "gold";
+      // xPos_yearPeriodText = this.xPos - (year.toString.length + (title.length + this.windowWidthUnit * 24));
+      // yPos_yearPeriodText = timelinePos;
+      xPos_titleText = this.xPos - (title.length + this.windowWidthUnit * 22);
+      yPos_titleText = timelinePos;
+
+      // this.ctx.fillText(`${year} ${period} -`, xPos_yearPeriodText, yPos_yearPeriodText);
+      this.ctx.fillText(`${year} ${period} - ${title}`, xPos_titleText, yPos_titleText);
+    } else {
+      // this.ctx.fillText(`------${year} ${period} -`, xPos_yearPeriodText, yPos_yearPeriodText);
+      this.ctx.fillText(`${year} ${period} - ${title}`, xPos_titleText, yPos_titleText);
+    }
   }
 }

@@ -25,7 +25,7 @@ export class EventEntryComponent implements OnInit {
 
   save(): void {
     //console.log(this.eventEntryForm)
-    var formData = new EventModel(0, this.eventEntryForm.get('title').value, this.eventEntryForm.get('era').value, this.eventEntryForm.get('year').value)
+    var formData = new EventModel(0, this.eventEntryForm.get('title').value, this.eventEntryForm.get('era').value, this.eventEntryForm.get('year').value, this.eventEntryForm.get('country').value)
     this.eventDataService.create(formData)
           .subscribe({
             next: () => {

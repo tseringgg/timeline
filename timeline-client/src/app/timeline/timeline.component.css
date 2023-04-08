@@ -60,7 +60,7 @@
 
 #canvas {
   background-color: rgb(36, 35, 35);
-  padding-left:10%;
+  /* padding-left:10%; */
   display: flex;
   justify-content: center;
   justify-items: center;

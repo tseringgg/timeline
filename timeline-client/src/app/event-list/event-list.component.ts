@@ -52,13 +52,13 @@ export class EventListComponent implements OnInit, OnDestroy {
     })
   }
 
-  getSampleEvents(){
-    this.events = [
-      new EventModel(1, "Death of Bob", "AD", 124),
-      new EventModel(2, "hfeianfeja", "BC", 111),
-      new EventModel(3, "Birth of Christ", "BC", 800)
-    ]
-  }
+  // getSampleEvents(){
+  //   this.events = [
+  //     new EventModel(1, "Death of Bob", "AD", 124),
+  //     new EventModel(2, "hfeianfeja", "BC", 111),
+  //     new EventModel(3, "Birth of Christ", "BC", 800)
+  //   ]
+  // }
 
   delete(id: number): void {
 
