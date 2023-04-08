@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'timeline',
     component: TimelineComponent,
-    canActivate: [MsalGuard]
+    // canActivate: [MsalGuard]
   },
   {
     path: 'profile',
@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent
+    component: TimelineComponent
   },
   {
     path: 'unauthorized',
