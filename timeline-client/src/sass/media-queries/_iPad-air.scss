@@ -1,0 +1,44 @@
+@media only screen and (max-width: 992px) {
+  .event-text li {
+    max-width: 400px;
+    font-size: 14px;
+  }
+
+  .headers {
+    font-size: 1.1rem;
+  }
+
+  .prehistory-headlines {
+    font-size: 1rem;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 90%;
+  }
+
+  .logo-container {
+    display: flex;
+    position: absolute;
+    justify-items: center;
+    height: 100px;
+    top: 5px;
+    width: 100%;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  .ligmincha-seal {
+    width: 70px;
+  }
+
+  .bubble {
+    width: 10vmin;
+    height: 4vmin;
+    left: 44.6%;
+  }
+
+  .centuryid, .period {
+    font-size: 12px;
+  }
+}

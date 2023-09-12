@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { config, Subscription } from 'rxjs';
+import { config, map, Subscription } from 'rxjs';
 import { EventEditDialogComponent } from '../event-edit-dialog/event-edit-dialog.component';
-import { EventModel } from '../models/event.model';
+import { TimelineEvent } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
+import { TimelineDataService } from '../services/timeline-data.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Timeline } from 'c:/git_jorjei/timeline/timeline-client/src/app/models/timeline.model';
 
 
 @Component({
@@ -12,12 +15,19 @@ import { EventDataService } from '../services/event-data.service';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit, OnDestroy {
-  events: EventModel[];
-  selectedEvent: EventModel;
-  displayedColumns: string[] = ['title', 'era', 'year', 'delete', 'isReviewed', 'isApproved'];
-  subs: Subscription[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private eventDataService: EventDataService, public dialog: MatDialog) { }
+  events: TimelineEvent[] = [];
+  selectedEvent: TimelineEvent;
+  displayedColumns: string[] = ['id', 'title', 'era', 'year', 'delete', 'isReviewed', 'isApproved'];
+  subs: Subscription[] = [];
+  timelines: Timeline[];
+
+  currentPageSize: number = 5;
+  currentPageIndex: number = 0;
+  totalRecordCount: number = 0;
+
+  constructor(private timelineDataService: TimelineDataService, private eventDataService: EventDataService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -33,13 +43,37 @@ export class EventListComponent implements OnInit, OnDestroy {
   }
 
   getEvents() {
-    this.eventDataService.get()
-          .subscribe({
-            next: (data) => this.events = data,
-            error: (err) => {},
-            complete: () => {}
-          })
+    // this.eventDataService.get()
+    //       .subscribe({
+    //         next: (data) => this.events = data,
+    //         error: (err) => {},
+    //         complete: () => {}
+    //       })
+
+    const pageIndex = !this.paginator ? this.currentPageIndex : this.paginator.pageIndex;
+    const pageSize = !this.paginator ? this.currentPageSize : this.paginator.pageSize;
+
+
+    this.timelineDataService.getTimelines()
+            // .pipe(map(x => x.map(y => y.events)))
+              .subscribe(x => {
+                this.timelines = x;
+                console.log(x.length);
+
+                // const requestHeader = JSON.parse(x.headers.get("X-Pagination"));
+                // this.totalRecordCount = requestHeader.TotalRecordCount;
+
+                this.timelines.forEach(x => {
+                    this.events = this.events.concat(x.events);
+                    console.log(this.events.length);
+                })
+              });
   }
+
+  handlePageEvent(e:PageEvent): void {
+    this.getEvents();
+  }
+
   openEditDialog(x: any): void {
     console.log(x);
     this.selectedEvent = x;

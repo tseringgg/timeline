@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { EventModel } from '../models/event.model';
+import { TimelineEvent } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 import { SessionService } from '../services/session.service';
 
@@ -25,15 +25,15 @@ export class EventEntryComponent implements OnInit {
 
   save(): void {
     //console.log(this.eventEntryForm)
-    var formData = new EventModel(0, this.eventEntryForm.get('title').value, this.eventEntryForm.get('era').value, this.eventEntryForm.get('year').value, this.eventEntryForm.get('country').value)
-    this.eventDataService.create(formData)
-          .subscribe({
-            next: () => {
-              this.eventDataService.onNewEntry(true);
-            },
-            error: (err) => console.log(err),
-            complete: () => {}
-          })
-    //this.ngOnInit();
+    // var formData = new TimelineEvent(0, this.eventEntryForm.get('title').value, this.eventEntryForm.get('era').value, this.eventEntryForm.get('year').value, this.eventEntryForm.get('country').value)
+    // this.eventDataService.create(formData)
+    //       .subscribe({
+    //         next: () => {
+    //           this.eventDataService.onNewEntry(true);
+    //         },
+    //         error: (err) => console.log(err),
+    //         complete: () => {}
+    //       })
+
   }
 }

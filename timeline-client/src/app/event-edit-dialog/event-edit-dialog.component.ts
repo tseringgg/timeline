@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventModel } from '../models/event.model';
+import { TimelineEvent } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { EventDataService } from '../services/event-data.service';
 })
 
 export class EventEditDialogComponent implements OnInit {
-  eventData: EventModel;
+  eventData: TimelineEvent;
   eventEditForm: FormGroup;
   constructor(private fb: FormBuilder, private eventDataService: EventDataService) { }
 
@@ -23,17 +23,17 @@ export class EventEditDialogComponent implements OnInit {
   }
 
   save(): void {
-    var formData = new EventModel(this.eventData.id, this.eventEditForm.get('title').value, this.eventEditForm.get('era').value, this.eventEditForm.get('year').value, this.eventEditForm.get('country').value)
-    this.eventData = formData;
-    this.eventDataService.patch(formData.id, formData)
-          .subscribe({
-            next: () => {
-              this.eventDataService.onNewEntry(true);
-            },
-            error: (err) => console.log(err),
-            complete: () => {}
-          })
-    this.ngOnInit();
+    // var formData = new TimelineEvent(this.eventData.id, this.eventEditForm.get('title').value, this.eventEditForm.get('era').value, this.eventEditForm.get('year').value, this.eventEditForm.get('country').value)
+    // this.eventData = formData;
+    // this.eventDataService.patch(formData.id, formData)
+    //       .subscribe({
+    //         next: () => {
+    //           this.eventDataService.onNewEntry(true);
+    //         },
+    //         error: (err) => console.log(err),
+    //         complete: () => {}
+    //       })
+    // this.ngOnInit();
   }
 
 }

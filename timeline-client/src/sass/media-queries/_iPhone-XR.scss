@@ -1,0 +1,45 @@
+@media only screen and (max-width: 600px) {
+  .event-text li {
+    max-width: 150px;
+    // overflow: hidden;
+    font-size: 10px;
+    // text-overflow: ellipsis;
+  }
+
+  .headers {
+    font-size: .8rem;
+  }
+
+  .prehistory-headlines {
+    font-size: .6rem;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 90%;
+  }
+
+  .logo-container {
+    display: flex;
+    position: absolute;
+    justify-items: center;
+    height: 100px;
+    top: 5px;
+    width: 100%;
+  }
+
+  .logo {
+    width: 130px;
+  }
+
+  .ligmincha-seal {
+    width: 50px;
+  }
+
+  .bubble {
+    width: 10vmin;
+    height: 4vmin;
+  }
+
+  .centuryid, .period {
+    font-size: 8px;
+  }
+}

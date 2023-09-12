@@ -25,6 +25,8 @@ import { AdminComponent } from './admin/admin.component';
 import { EventEditDialogComponent } from './event-edit-dialog/event-edit-dialog.component';
 import { environment } from 'src/environments/environment';
 
+import { PopoverConfig, PopoverModule } from 'ngx-bootstrap/popover';
+
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
@@ -45,6 +47,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    PopoverModule,
+
     MaterialModule,
     ReactiveFormsModule,
     MatButtonModule,

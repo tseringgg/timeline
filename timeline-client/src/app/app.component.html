@@ -1,41 +1,57 @@
 
-<div class="app-container">
+<div >
   <div class="navbar">
     <mat-toolbar>
-      <div class="toolbar-spacer"></div>
-      <a mat-button [routerLink]="['timeline']">Timeline</a>
-      <a mat-button [routerLink]="['admin']">Admin</a>
-      <a mat-button [routerLink]="['profile']">Profile</a>
+      <div class="toolbar">
+        <div id="brand-title">
+          <div>
+            <!-- <i class="fa fa-lightbulb-o"></i> -->
+            <!-- <i class="fa-lightbulb-on"></i>
+            <i class="fa-solid fa-lightbulb-on"></i> -->
+            Tibet History Timeline
+          </div>
+        </div>
+        <div class="menu-items">
+          <!-- <div class="toolbar-spacer"></div> -->
+          <a mat-button [routerLink]="['timeline']">Timeline</a>
+          <a mat-button [routerLink]="['admin']">Admin</a>
+          <a mat-button [routerLink]="['profile']">Profile</a>
 
-      <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
-      <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+          <span id="auth-buttons-container">
+            <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+            <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+          </span>
+        </div>
+      </div>
+
     </mat-toolbar>
   </div>
 
 
   <div class="main-panel">
-    <div class="logo-container" >
-      <a href="/" routerLink="/timeline">
+    <!-- <div class="logo-container" > -->
+      <!-- <a href="/" routerLink="/timeline">
         <img class="logo" src="assets/2X2 ylylogo.png" />
-      </a>
-      <div>
+      </a> -->
+      <!-- <div>
         <h2>Tibet History Timeline</h2>
-      </div>
+      </div> -->
       <!-- <i class="fa-solid fa-tags"></i> -->
 
       <!-- <i class="fa-solid fa-lightbulb-exclamation-on"></i> -->
-      <mat-icon id="lightbulb">wb_incandescent</mat-icon>
+      <!-- <mat-icon id="lightbulb">wb_incandescent</mat-icon>
       <ul class="prehistory-data">
         <li>Denisovans roamed Tibet 150,000 years ago</li>
         <li>&nbsp;|&nbsp;</li>
         <li>Modern humans roamed Tibet 50,000 years ago</li>
-      </ul>
-    </div>
+      </ul> -->
+    <!-- </div> -->
 
-    <div>
-      <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-      <router-outlet *ngIf="!isIframe"></router-outlet>
-    </div>
+    <!-- <div>
+
+    </div> -->
+    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+    <router-outlet *ngIf="!isIframe"></router-outlet>
 
   </div>
 

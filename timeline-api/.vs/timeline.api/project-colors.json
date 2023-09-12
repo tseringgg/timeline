@@ -15,7 +15,17 @@
       "ProjectGuid": "6f79e329-f6cd-4347-9979-df826beb2992",
       "DisplayName": "timeline.domain",
       "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "e0d572a1-4fca-40c8-a88c-ad14ff56a364": {
+      "ProjectGuid": "e0d572a1-4fca-40c8-a88c-ad14ff56a364",
+      "DisplayName": "timeline.dto",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

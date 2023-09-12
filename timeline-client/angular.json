@@ -25,7 +25,12 @@
             "styles": [
               "./src/sass/timeline-main.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/"
+              ]
+            }
           },
           "configurations": {
             "production": {

@@ -2,8 +2,8 @@
   /* display: flex;
   flex-direction: column;
   justify-content: center; */
-  display: grid;
-  place-items: center;
+  /* display: grid;
+  place-items: center; */
 }
 
 .navbar {
@@ -16,6 +16,49 @@
   flex: 1 1 auto;
 }
 
+.toolbar {
+  display: flex;
+  justify-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+#brand-title {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: rgb(58, 55, 55);
+  padding-bottom: 5px;
+  opacity: .7;
+  color: goldenrod;
+  font-size: 1.6rem;
+  font-weight: 500;
+  border-bottom: solid 1px rgb(144, 112, 53);
+  font-family: 'Times New Roman', Times, serif;
+  text-shadow: 2px 4px 4px rgba(18, 11, 11, 0.6);
+
+  &:hover * {
+    color: gold;
+    opacity: 1;
+  }
+}
+
+.menu-items {
+  display: flex;
+  justify-content: right;
+  font-family: 'Times New Roman', Times, serif;
+  /* color: goldenrod;
+  opacity: 0.8; */
+  background-color: rgb(27, 25, 25);
+  padding-right: 50px;
+  width: 100%;
+}
+
+#auth-buttons-container {
+  margin-left: 40px;
+}
+
 /* span.title {
   color: white;
   font-size: 2rem;
@@ -23,12 +66,12 @@
   font-weight: 600;
 } */
 
-.logo-container {
+/* .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
+} */
 .logo {
   width: 16rem;
   margin-top: .5rem;
@@ -40,4 +83,7 @@
   height: 50px;
   width: 60px;
 }
+
+
+/* CSS text effect */
 

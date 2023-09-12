@@ -1,275 +1,295 @@
-import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { EventModel } from '../models/event.model';
-import { EventDataService } from '../services/event-data.service';
+import { TimelineEvent } from '../models/event.model';
+import { TimelineDataService } from '../services/timeline-data.service';
+import { Timeline } from '../models/timeline.model';
+
+export interface EventTextPosition {
+  top: string,
+  left: string,
+  position: string
+}
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  styleUrls: ['./timeline.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class TimelineComponent implements OnInit {
-  title = 'drawgraph';
-  eventsList: EventModel[];
-  subs: Subscription[] = [];
+  data: Timeline[] = [];
 
-  @ViewChild('myCanvas', {static: false}) myCanvas?: ElementRef<HTMLCanvasElement>;
+  timelines:Timeline[] = [];
 
-  public context: CanvasRenderingContext2D;
-  ctx: CanvasRenderingContext2D;
+  hasZeroCenturyDone:boolean = false;
 
-  readonly verticalLineColor = "yellow";
-  readonly timelineColor = "goldenrod";
-  readonly eventTextColor = "black";
+  // spaceCounter: number = 0;
 
-  readonly tibetEventsHeader = "Tibet Events";
-  readonly worldEventsHeader = "World Events";
+  spaceUnit: number = 4;
 
-  readonly tibetEventTextColor = "white";
-  readonly worldEventTextColor = "firebrick";
+  centuryTopBorderPos: number = 0;
+  centuryBottomBorderPos: number = 0;
 
-  readonly timeGapPixels = 130;
-  readonly verticalStartPos = 70;
+  currentTextPos: number = 0;
+  currentAdTextPos: number = 0;
+  nexTextPos: number = 0;
 
-  /* Events */
-  windowWidthUnit = window.innerWidth / 100;
-  canvasWidth = this.windowWidthUnit * 65; //1300;
+  zeroReached: boolean = false;
 
+  bubblePositions: string[] = [];
+  horizontalLinePositions: string[] = [];
 
-  xPos = this.canvasWidth / 2; /// vertical line left Pos
-  yPos = this.verticalStartPos; // vertical line top pos
-  labelPos = 70;
-  readonly timeIncrement = this.timeGapPixels;
-  earliestCentury = -5;
-  latestCentury = 3;
-  canvasHeight = 0;
+  containerHeight: string = '';
 
+  eventTextPositions: EventTextPosition[][] = [];
+  isCached: boolean = false;
+  hasEvent: boolean = false;
+  isReady: boolean = false;
+  eventCount: number = 0;
+  totalEvents: TimelineEvent[] = [];
+  verticalLineEndPos: number;
 
-
-  /* Date Unit */
-  readonly xPosLabel =  this.windowWidthUnit * 5;
-  yPosLabel = this.verticalStartPos;  readonly dateIncrement = this.timeGapPixels;
-
-  readonly eventHeaderXPos = 20;
-
-  horizontalLineLength = (this.xPos + this.xPos) - 200; //(window.innerWidth / 100) * 35;
-
-  isReady = false;
-
-  xPos_tibetHeading = this.xPos - (this.windowWidthUnit * 20);
-  yPos_tibetHeading = 50;
-
-  xPos_worldHeading = this.xPos - (this.windowWidthUnit * -10);
-  yPos_worldHeading = 50;
-
-  circleColors = [
-    "navajowhite", "yellow", "lightpink", "peachpuff", "aquamarine", "aqua", "lightgreen", "lightblue", "lavender", "thistle"
-  ]
-  constructor(private eventDataService: EventDataService){}
+  constructor(private timelineDataService: TimelineDataService) {
+  }
 
   ngOnInit(): void {
-    this.getEvents();
-  }
+    // this.data = this.timelineDataService.getJsonTestFile();
 
-  getEvents() {
-    this.eventDataService.get()
+    this.timelineDataService.getTimelines()
           .subscribe({
-            next: (data) => {
-              this.isReady = true;
-              this.eventsList = data;
-             this.calculateCanvasDimensions(this.eventsList);
-             this.setCanvasHeight();
-            },
-            error: (err) => {},
+            next: (x) => this.data = x,
             complete: () => {
-              setTimeout(() => this.drawTimelines(), 0);
+              const bcTimelines = this.data.filter(x => x.era == "BC").sort((a,b) => a.centuryId);
+              const adTimelines = this.data.filter(x => x.era === "AD").sort((a,b) => a.centuryId);
+
+              this.timelines = bcTimelines.concat(adTimelines);
+
+              this.timelines.forEach(x => {
+                  this.totalEvents = this.totalEvents.concat(x.events.map(x => x));
+              })
+
+              console.log(`this.totalEvents == ${this.totalEvents.length}`);
+              this.initialize();
             }
           });
+ }
+
+  initialize(): void {
+    setTimeout(() => {
+      let element = document.getElementById('container');
+      let verticalLineElement = document.getElementById('vertical-line');
+
+      const arrLength = this.eventTextPositions.length;
+      const lastItem = this.eventTextPositions[arrLength - 1];
+
+      let lastTop:string = "";
+      if (lastItem !== null && lastItem !== undefined) {
+        const eventArrLength = lastItem.length;
+        const lastEventArrItem = lastItem[eventArrLength - 1];
+        lastTop = lastEventArrItem?.top;
+      }
+
+      if (this.containerHeight !== '') {
+        return;
+      }
+
+      if (element != null) {
+        this.containerHeight = this.centuryBottomBorderPos + 70 + "vmin";
+        element.style["height"] = this.containerHeight;
+      }
+
+      if (verticalLineElement != undefined) {
+        verticalLineElement.style["height"] = this.centuryBottomBorderPos + "vmin";
+      }
+
+      this.isCached = true;
+      this.isReady = true;
+    }, 100);
   }
 
-  writeCountryHeaders(): void {
-    this.ctx.beginPath();
-    this.ctx.fillStyle = 'orange';
-    this.ctx.font = "24px Calibri";
+  private calculateBcEventPositions(era:string, centuryId:number, index: number): void {
+    const events = this.timelines.filter(x => x.era === era && x.centuryId === centuryId)[0].events;
 
-    this.ctx.fillText(`Tibet`, this.xPos_tibetHeading, this.yPos_tibetHeading);
-    this.ctx.fillText(`World`, this.xPos_worldHeading, this.yPos_worldHeading);
-  }
-
-  drawTimelines(): void {
-
-    if (!this.myCanvas) {
+    if (centuryId == 0 && !this.hasZeroCenturyDone) {
+      this.hasZeroCenturyDone = true;
+      this.centuryTopBorderPos = this.centuryTopBorderPos - 20;
+      this.centuryBottomBorderPos = this.centuryBottomBorderPos + 10;
       return;
     }
 
-    this.ctx = this.myCanvas?.nativeElement.getContext('2d');
+    let minSpaceUnit:number = this.spaceUnit;
 
-    this.writeCountryHeaders();
-
-    this.drawTimelineLabels();
-
-    this.eventsList?.forEach(x => {
-      this.drawEvent(x);
-    })
-
-    this.ctx.stroke();
-  }
-
-  calculateCanvasDimensions(list: EventModel[]): void {
-    let yearList = new Array<Number>(list.length);
-    let earliestYear;
-    let latestYear;
-
-    for(let i = 0; i < yearList.length; i++) {
-      if(list[i].era == "BC") {
-        yearList[i] = list[i].year * -1;
-      } else {
-        yearList[i] = list[i].year;
+    if (index > 0) {
+      if (events.length === 1) {
+        minSpaceUnit = 8;
       }
     }
-    latestYear = earliestYear = yearList[0];
 
-    yearList.forEach(x => {
-      if(x > latestYear) {
-        latestYear = x;
-      }
-      if (x < earliestYear){
-        earliestYear = x;
-      }
-    });
-
-    if(earliestYear < 0) {
-      this.earliestCentury = Math.floor(earliestYear / 100);
-    } else if(earliestYear >= 0) {
-      this.earliestCentury = Math.floor(earliestYear / 100);
-    }
-    if(latestYear < 0) {
-      this.latestCentury = Math.ceil(latestYear / 100);
-    } else if(latestYear >= 0) {
-      this.latestCentury = Math.ceil(latestYear / 100);
-    }
-  }
-
-  setCanvasHeight() {
-    this.canvasHeight = (this.latestCentury - this.earliestCentury) * this.timeGapPixels + this.verticalStartPos * 2;
-  }
-
-  drawTimelineLabels(): void {
-    for(let i = this.earliestCentury; i <= this.latestCentury; i++){
-      let period;
-      this.drawCircle();
-      this.drawHorizontalCenturyLine();
-      this.drawVerticalLine();
-      if(i < 0) {
-        period = "BC";
-      } else {
-        period = "AD";
-      }
-      let centuryId = Math.abs(i)*100
-      this.drawTimelineLabel(centuryId.toString(), period);
-      this.incrementYPos();
-      this.incrementDateLabelYPos();
-    }
-  }
-
-  drawCircle(): void {
-    this.ctx.beginPath();
-    this.ctx.arc(this.xPos, this.yPos, 16, 0, 2 * Math.PI);
-    const colorId = Math.floor(Math.random() * 10);
-    this.ctx.fillStyle = this.circleColors[colorId];
-    this.ctx.fill();
-        this.ctx.strokeStyle = this.verticalLineColor;
-    this.ctx.stroke();
-
-    // this.ctx.strokeStyle = this.verticalLineColor;
-    // // this.ctx.setLineDash([3, 15]);
-    // this.ctx.lineTo(this.horizontalLineLength, this.yPos);
-    // this.ctx.stroke();
-
-    // /** Draw horizontal century line for Tibet timelines */
-    // this.ctx.lineTo(this.xPos - 500, this.yPos);
-  }
-
-  drawHorizontalCenturyLine(): void {
-    // this.moveToBaseLine();
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = "white";
-    this.ctx.lineWidth = .8;
-    this.ctx.moveTo(this.xPosLabel + this.windowWidthUnit * 3, this.yPosLabel);
-    this.ctx.lineTo(this.xPosLabel + this.windowWidthUnit * 50, this.yPosLabel);
-    this.ctx.setLineDash([5, 10]);
-
-    this.ctx.stroke();
-
-    /** Reset back to solid line */
-    this.ctx.setLineDash([]);
-  }
-
-  moveToBaseLine(): void {
-    this.ctx.moveTo(this.xPos, this.verticalStartPos);
-  }
-
-  drawVerticalLine(): void {
-    this.moveToBaseLine();
-    this.ctx.lineWidth = .3;
-    // this.ctx.fillStyle = this.verticalLineColor;
-    this.ctx.strokeStyle = this.verticalLineColor;
-    this.ctx.lineTo(this.xPos, this.yPos);
-  }
-
-  incrementYPos(): void {
-    this.yPos = this.yPos + this.timeIncrement;
-  }
-
-  incrementDateLabelYPos(): void {
-    this.yPosLabel = this.yPosLabel + this.dateIncrement;
-  }
-
-  drawTimelineLabel(dateLabel: string, period: string): void {
-    this.ctx.fillStyle = this.timelineColor;
-    this.ctx.font = "16px Calibri";
-
-    if (+dateLabel == 0) {
-      this.ctx.fillText(`${dateLabel}`, this.xPosLabel, this.yPosLabel + 5);
-      // this.ctx.fillText(`${dateLabel}`, this.xPosLabel + 485, this.yPosLabel + 5);
+    if (centuryId === 0 && era === "AD") {
+      const divider: number = 8;
+      this.centuryTopBorderPos = this.centuryBottomBorderPos + divider;
+      this.centuryBottomBorderPos = this.centuryBottomBorderPos + events?.length * minSpaceUnit + divider;
     } else {
-      this.ctx.fillText(`${dateLabel} ${period} `, this.xPosLabel, this.yPosLabel + 5);
-      // this.ctx.fillText(`${dateLabel} ${period} `, this.xPosLabel + 485, this.yPosLabel + 5);
+      this.centuryTopBorderPos = this.centuryBottomBorderPos;
+      this.centuryBottomBorderPos = this.centuryBottomBorderPos + events?.length * minSpaceUnit;
     }
   }
 
-  drawEvent(entry: EventModel): void {
-    let title = entry.title;
-    let year = entry.year;
-    let period = entry.era;
-    let relativeZero = this.timeGapPixels * Math.abs(this.earliestCentury) + this.verticalStartPos;
-    let displacementFromZero = (this.timeGapPixels / 100) * year;
-
-    if(period == "BC"){
-      displacementFromZero *= -1;
+  isZeroAdReached(era: string, centuryId: number): boolean {
+    if (this.zeroReached) {
+      return true;
     }
 
-    let timelinePos = relativeZero + displacementFromZero;
-    this.ctx.font = "16px Calibri";
+    if (era.toLocaleUpperCase() === "AD" && centuryId === 0) {
+      this.zeroReached = true;
+    }
+    return this.zeroReached;
+  }
 
-    // let xPos_yearPeriodText = this.xPos + 8;
-    // let yPos_yearPeriodText = timelinePos;
-    let xPos_titleText = this.xPos + 100;
-    let yPos_titleText = timelinePos;
-    this.ctx.fillStyle = "silver";
+  getBubbleTopPosition(era:string, centuryId:number, index: number): string {
+    this.calculateBcEventPositions(era, centuryId, index);
 
-    if (entry.country === "Tibet") {
-      this.ctx.fillStyle = "gold";
-      // xPos_yearPeriodText = this.xPos - (year.toString.length + (title.length + this.windowWidthUnit * 24));
-      // yPos_yearPeriodText = timelinePos;
-      xPos_titleText = this.xPos - (title.length + this.windowWidthUnit * 22);
-      yPos_titleText = timelinePos;
+    if (!this.isCached) {
+      this.eventTextPositions[index] = [];
+    }
 
-      // this.ctx.fillText(`${year} ${period} -`, xPos_yearPeriodText, yPos_yearPeriodText);
-      this.ctx.fillText(`${year} ${period} - ${title}`, xPos_titleText, yPos_titleText);
+    let bubbleTopPosition = this.bubblePositions[index];
+
+    if (!!bubbleTopPosition) {
+      return bubbleTopPosition;
     } else {
-      // this.ctx.fillText(`------${year} ${period} -`, xPos_yearPeriodText, yPos_yearPeriodText);
-      this.ctx.fillText(`${year} ${period} - ${title}`, xPos_titleText, yPos_titleText);
+      if (era === "BC") {
+        this.bubblePositions[index] = this.centuryBottomBorderPos + 'vmin';
+      } else {
+        this.bubblePositions[index] = this.centuryTopBorderPos + 'vmin';
+      }
+    }
+    return this.bubblePositions[index];
+  }
+
+  getHorizontalLinePosition(timeline: Timeline, index:number): string {
+    const padding = 4;
+    let retVal: string = '';
+
+    let position = this.horizontalLinePositions[index];
+
+    if (!!position) {
+      return position;
+    } else {
+      if (timeline.era === "AD") {
+        this.horizontalLinePositions[index] = this.centuryTopBorderPos + padding + 'vmin';
+      } else {
+        this.horizontalLinePositions[index] = this.centuryBottomBorderPos + padding + 'vmin';
+      }
+    }
+
+    return this.horizontalLinePositions[index];
+  }
+
+  private isLastElement(currentCount:number): boolean {
+    // console.log(`idx ${idx} - txtIdx ${txtIdx} timeline ${this.timelines.length}`);
+    if (this.totalEvents.length === currentCount) {
+      return true;
+    }
+    return false;
+  }
+
+  getEventTextPosition(era: string, event:TimelineEvent, eventCount: number, index:number, textIndex: number): object {
+    // console.log(`era: ${era}, event = ${event} - index = ${index} - textIndex = ${textIndex}`);
+    let spaceDelta:number = 0;
+    let topPos: string = '';
+    let leftPos: string = '';
+    let i = index;
+    let j = textIndex;
+
+    this.eventCount = ++this.eventCount;
+    console.log(`this.eventCount ${this.eventCount}`);
+
+    if (this.isLastElement(this.eventCount)) {
+      this.verticalLineEndPos = this.centuryBottomBorderPos;
+      this.isReady = true;
+    }
+
+    const key = this.eventTextPositions[index];
+
+    if (key?.length > 0) {
+      let textPosition = key[textIndex];
+
+      if (!!textPosition) {
+        this.hasEvent = true;
+        return textPosition;
+      }
+    }
+    // const key = this.eventTextPositions[index];
+
+    // let textPosition = this.eventTextPositions[index][textIndex];
+
+    // if (!!textPosition) {
+    //   return textPosition;
+    // }
+
+    spaceDelta = this.centuryBottomBorderPos - this.centuryTopBorderPos;
+    const unit = spaceDelta / eventCount;
+
+    if (event.country.toLocaleLowerCase() === 'tibet') {
+      leftPos = '5%'; //'15em';
+    } else {
+      leftPos = '55%'; //'50em';
+    }
+
+    if (era == "BC") {
+      if (index == 0 && this.nexTextPos == 0) {
+        this.currentTextPos = this.centuryTopBorderPos;
+      } else {
+        this.currentTextPos = this.nexTextPos;
+      }
+
+      this.nexTextPos = this.currentTextPos + unit;
+      topPos = this.currentTextPos + 5 + 'vmin';
+    }
+
+      if (era.toLocaleUpperCase() == "AD") {
+        if (this.currentAdTextPos == 0) {
+          this.currentAdTextPos = this.centuryBottomBorderPos;
+        } else {
+          this.currentAdTextPos = this.nexTextPos;
+        }
+
+        this.nexTextPos = this.currentAdTextPos + unit;
+        topPos = this.currentAdTextPos + -5 + 'vmin';
+      }
+
+      if (!this.eventTextPositions[i]) {
+        this.hasEvent = false;
+        return {};
+      }
+      this.hasEvent = true;
+      this.eventTextPositions[i][j] = {
+        'top': topPos,
+        'position': 'absolute',
+        'left': leftPos,
+      };
+
+      return this.eventTextPositions[i][j];
+  }
+
+  getEvents(era: string, centuryId: number): TimelineEvent[] | undefined {
+    return this.timelines.find(x => x.era === era && x.centuryId === centuryId)?.events;
+  }
+
+  getCenturyBackgroundTopPos(): string {
+    return this.centuryTopBorderPos + 4 + "vmin";
+  }
+
+  getCenturyBackgroundHeight(): string {
+    return this.centuryBottomBorderPos - this.centuryTopBorderPos + "vmin";
+  }
+
+  getVerticalLineLength(): object {
+    return {
+      top: "5vmin",
+      height: this.verticalLineEndPos + "vmin"
     }
   }
 }

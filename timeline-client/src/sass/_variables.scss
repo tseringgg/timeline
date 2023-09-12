@@ -1,5 +1,6 @@
-@use '../../node_modules/@angular/material' as mat;
-@include mat.core();
+// @use '../../node_modules/@angular/material' as mat;
+@use "node_modules/@angular/material/" as mat;
+// @include mat.core();
 
 $mat-primary: (
   50 : #e8e8e8,
