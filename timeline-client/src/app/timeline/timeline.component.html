@@ -20,7 +20,7 @@
 
   <div class="canvas">
     <ng-template #popTemplate let-event="event"><div class="popover-target" >
-      <img class="popup-img" src="http://www.kikisoso.com/assets/Buddha.1d66e6ccfaf519ebf66899d5db28ff76.jpg">
+      <img class="popup-img" [src]="event.imageUrl">
       <div class="sub-content">
         <!-- <div class="description">
           {{ event.title }} Denisovans roamed Tibet 150,000 years ago | Modern humans roamed Tibet 50,000 years ago
