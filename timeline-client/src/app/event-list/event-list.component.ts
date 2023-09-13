@@ -6,7 +6,7 @@ import { TimelineEvent } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 import { TimelineDataService } from '../services/timeline-data.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Timeline } from 'c:/git_jorjei/timeline/timeline-client/src/app/models/timeline.model';
+import { Timeline } from '../models/timeline.model';
 
 
 @Component({
