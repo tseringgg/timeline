@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, of, pipe, Subject, tap } from "rxjs";
 import { environment } from "src/environments/environment";
-import { TimelineEvent } from "../models/event.model";
+import { NewEvent, TimelineEvent } from "../models/event.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class EventDataService {
     return of(eventsList);
   }
 
-  create(event: TimelineEvent): Observable<any> {
+  create(event: NewEvent): Observable<any> {
     return this._httpClient.post(this.baseUrl, event);
     //.pipe(tap(catchError(x => console.log(`Unexpected error: ${x}`))));
   }

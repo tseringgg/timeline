@@ -1,0 +1,26 @@
+.card {
+  background-color: transparent;
+  border: solid rgb(113, 106, 106) 1px;
+  margin: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.mdc-dialog__actions {
+  padding-right: 35px;
+}
+
+.form-control, .form-select {
+  background-color: #424242;
+  color: white;
+}
+
+#imageUrl {
+  /* height: 15px; */
+  line-height: 1;
+  height: 40px;
+}
+
+.add-button {
+  padding-top: 0px;
+}

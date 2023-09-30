@@ -54,65 +54,67 @@ var configureAutoMapper = (WebApplicationBuilder builder) =>
     builder.Services.AddSingleton(mapper);
 };
 
-var builder = WebApplication.CreateBuilder(args);
-
-//builder.Services.AddDbContext<TimelineDbContext>((options, context) => context.UseInMemoryDatabase(new Guid().ToString()));
-
-// Add services to the container. 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
-    .EnableTokenAcquisitionToCallDownstreamApi()
-
-            .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
-            //.AddDownstreamWebApi("DownstreamApi",builder.Configuration.GetSection("DownstreamApi")) 
-            .AddInMemoryTokenCaches();
-
-builder.Services.AddAuthorization(options =>
+try
 {
-    options.AddPolicy(PolicyNames.ReadOnlyUser, policy =>
+    var builder = WebApplication.CreateBuilder(args);
+
+    //builder.Services.AddDbContext<TimelineDbContext>((options, context) => context.UseInMemoryDatabase(new Guid().ToString()));
+
+    // Add services to the container. 
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
+        .EnableTokenAcquisitionToCallDownstreamApi()
+
+                .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
+                //.AddDownstreamWebApi("DownstreamApi",builder.Configuration.GetSection("DownstreamApi")) 
+                .AddInMemoryTokenCaches();
+
+    builder.Services.AddAuthorization(options =>
     {
-        policy.RequireAssertion(ctx =>
+        options.AddPolicy(PolicyNames.ReadOnlyUser, policy =>
         {
-            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readonly_user");
-            return f != null;
+            policy.RequireAssertion(ctx =>
+            {
+                var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readonly_user");
+                return f != null;
+            });
+        });
+
+        options.AddPolicy(PolicyNames.ReadWriteUser, policy =>
+        {
+            policy.RequireAssertion(ctx =>
+            {
+                var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readwrite_user");
+                return f != null;
+            });
+        });
+
+        options.AddPolicy(PolicyNames.Administrator, policy =>
+        {
+            policy.RequireAssertion(ctx =>
+            {
+                var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_admin");
+                return f != null;
+            });
         });
     });
 
-    options.AddPolicy(PolicyNames.ReadWriteUser, policy =>
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle 
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(c =>
     {
-        policy.RequireAssertion(ctx =>
+        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Timeline.Api", Version = "v1" });
+        c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
         {
-            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_readwrite_user");
-            return f != null;
+            Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+            Name = "Authorization",
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
         });
-    });
 
-    options.AddPolicy(PolicyNames.Administrator, policy =>
-    {
-        policy.RequireAssertion(ctx =>
-        {
-            var f = ctx.User.Claims.FirstOrDefault(c => c.Value == "timeline_admin");
-            return f != null;
-        });
-    });
-});
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Timeline.Api", Version = "v1" });
-    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
-    {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-        Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
-
-    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement() {
+        c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement() {
     {
         new OpenApiSecurityScheme
         {
@@ -127,34 +129,48 @@ builder.Services.AddSwaggerGen(c =>
         },
         new List<string>()
         }
+        });
     });
-});
 
-builder.Services.AddCors(o => o.AddPolicy("default", builder =>
+    builder.Services.AddCors(o => o.AddPolicy("default", builder =>
+    {
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    }));
+
+    configureAutoMapper(builder);
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline. 
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseCors("default");
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+}
+catch (Exception ex)
 {
-    builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-}));
-
-configureAutoMapper(builder);
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline. 
-if (app.Environment.IsDevelopment())
+    // Log exception
+}
+finally
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // Log.CloseAndFlush();
 }
 
-app.UseCors("default");
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+public partial class Program
+{
+    public const string CorsPolicyName = "default";
+}

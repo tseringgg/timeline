@@ -16,7 +16,12 @@ export class AdminComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(EventEntryComponent);
+    const dialogRef = this.dialog.open(EventEntryComponent,
+      {
+        position: { top: '80px' },
+        width: '100%',
+        // height: '80%'
+    });
 
     dialogRef.disableClose = true;
     //this.dialogId = dialogRef.id;

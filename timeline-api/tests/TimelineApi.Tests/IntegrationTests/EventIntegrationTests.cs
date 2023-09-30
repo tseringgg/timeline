@@ -13,28 +13,27 @@ using Timeline.WebApi.Tests.IntegrationTests.Helpers;
 using Xunit;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 using Newtonsoft.Json;
+using TimelineApi.Tests.IntegrationTests.Helpers;
+using System.Net.Http;
 
 namespace TimelineApi.Tests.IntegrationTests
 {
-    public class EventIntegrationTests : TestBase
+    public class EventIntegrationTests : TestBase_IntegrationTests
     {
-        private readonly HttpClient _httpClient;
+        private HttpClient _httpClient;
         private string baseUrl = "api/Event";
+        private CustomWebApplicationFactory<Program> _factory;
 
         public EventIntegrationTests(CustomWebApplicationFactory<Program> factory)
         {
-            _httpClient = factory.CreateClient(new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryClientOptions
-            {
-                AllowAutoRedirect = false
-            });
-
-            _httpClient.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue(scheme: TestAuthHandler.testAuthScheme);
+            _factory = factory;
         }
 
         [Fact]
         public async Task CreateNewEvent_Success()
         {
+            _httpClient = CreateClientWithAdminAuthorization(_factory);
+
             var newEvent = new Event { };
 
             var request = new HttpRequestMessage(HttpMethod.Post, baseUrl);

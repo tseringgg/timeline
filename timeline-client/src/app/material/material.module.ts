@@ -30,6 +30,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatNativeDateModule } from "@angular/material/core";
 
 
 
@@ -45,6 +46,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatIconModule,
         MatAutocompleteModule,
         MatDatepickerModule,
+        MatNativeDateModule,
         MatFormFieldModule,
         MatRadioModule,
         MatSelectModule,
@@ -61,7 +63,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         MatExpansionModule,
         MatButtonToggleModule,
         MatChipsModule,
-        MatIconModule,
+        // MatIconModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
         MatDialogModule,

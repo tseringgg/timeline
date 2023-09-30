@@ -17,35 +17,18 @@ namespace Timeline.WebApi.Tests.IntegrationTests.Helpers
 
             builder.ConfigureServices(services =>
             {
-                var descriptor = services.SingleOrDefault(x => x.ServiceType == typeof(TimelineDbContext));
-
-                if (descriptor != null)
-                {
-                    services.Remove(descriptor);
-                }
-
-                services.AddDbContext<TimelineDbContext>((options, context) => context.UseInMemoryDatabase(new Guid().ToString()));
-
-                /* Since Asp.Net 7, this is the way to implement test auth handler */
-                services.AddAuthentication(defaultScheme: TestAuthHandler.testAuthScheme)
-                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
-                    TestAuthHandler.testAuthScheme, options => { });
-
-                /* This no longer works with AspNet 7, EF Core 7 */
-                //services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
-
-                var sp = services.BuildServiceProvider();
-
-                using (var scope = sp.CreateScope())
-                {
-                    var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<TimelineDbContext>();
-                    db.Database.EnsureCreated();
-
-
-                }
+                /** NOTE: Do not add TestAuthHandler and Database here 
+                 * Reasons:
+                 * 1. AuthHandler needs to be added from test level with specific authorization. See 'EventIntegrationTests'
+                 * 2. Database needs to be added from each test because the name of the database needs to be test specific.
+                 *  For example, when a test creates an event from first Http call, and then tries to patch, or get from second call
+                 *  the database name must be the same to be able to share the data between Http calls. On the other hand, the
+                 *  database base must be isolated between tests so that they don't share data.
+                 */
+                // Add mocked services e.g.
+                // services.AddScoped<IFooService, MockFooService>();
+                // services.AddScoped<IBarService, MockBarService>();
             });
-            //base.ConfigureWebHost(builder);
         }
     }
 }

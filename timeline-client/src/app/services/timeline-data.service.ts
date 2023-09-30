@@ -25,61 +25,61 @@ export class TimelineDataService {
         "centuryId": 600,
         "era": "BC",
         "events": [
-          { "id": 1, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 2, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 3, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 4, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 5, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 6, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 7, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" },
-          { "id": 8, "era": "BC", "year": 673, "title": "Birth of Jesus", "country": "India", "eventTypeId": 1,"description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" }
+          { "id": 1, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 2, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 3, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 4, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 5, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 6, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 7, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] },
+          { "id": 8, "era": "BC", "year": 673, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "India", "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] }
         ]
       },
       {
         "centuryId": 500,
         "era": "BC",
         "events": [
-          { "id": 88, "era": "BC", "year": 563, "title": "Birth of Buddha Shakyamuni", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 9, "era": "BC", "year": 563, "title": "Birth of some other guy", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 10, "era": "BC", "year": 563, "title": "Founding of some monastery", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 11, "era": "BC", "year": 563, "title": "Birth of Buddha Shakyamuni", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 12, "era": "BC", "year": 563, "title": "Birth of Buddha Shakyamuni", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 13, "era": "BC", "year": 563, "title": "Birth of Buddha Shakyamuni", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
+          { "id": 88, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Birth of Buddha Shakyamuni", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 9, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Birth of some other guy", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 10, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Founding of some monastery", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 11, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Birth of Buddha Shakyamuni", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 12, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Birth of Buddha Shakyamuni", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 13, "era": "BC", "year": 563, "eventDate": "March 10, 1959", "title": "Birth of Buddha Shakyamuni", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
         ]
       },
       {
         "centuryId": 400,
         "era": "BC",
-        "events": [{ "id": 14, "era": "BC", "year": 452, "title": "Ming dynasty consolidation", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 14, "era": "BC", "year": 452, "eventDate": "March 10, 1959", "title": "Ming dynasty consolidation", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 300,
         "era": "BC",
-        "events": [{ "id": 15, "era": "BC", "year": 342, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 15, "era": "BC", "year": 342, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 200,
         "era": "BC",
         "events": [
-          { "id": 16, "era": "BC", "year": 212, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 17, "era": "BC", "year": 212, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 18, "era": "BC", "year": 212, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
+          { "id": 16, "era": "BC", "year": 212, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 17, "era": "BC", "year": 212, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 18, "era": "BC", "year": 212, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
         ]
       },
       {
         "centuryId": 100,
         "era": "BC",
-        "events": [{ "id": 19, "era": "BC", "year": 113, "title": "Birth of Jesus", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 19, "era": "BC", "year": 113, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 1,
         "era": "BC",
-        "events": [{ "id": 20, "era": "BC", "year": 79, "title": "Birth of Sponge Bob", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 20, "era": "BC", "year": 79, "eventDate": "March 10, 1959", "title": "Birth of Sponge Bob", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 1,
         "era": "AD",
-        "events": [{ "id": 21, "era": "AD", "year": 12, "title": "Birth of Jesus", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 21, "era": "AD", "year": 12, "eventDate": "March 10, 1959", "title": "Birth of Jesus", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 100,
@@ -89,7 +89,7 @@ export class TimelineDataService {
       {
         "centuryId": 200,
         "era": "AD",
-        "events": [{ "id": 22, "era": "AD", "year": 256, "title": "256 Birth of Foo Tsenpo lljl afakkj adfllll df af lasdfj alfjalfjlj saf llalsf lal ", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 22, "era": "AD", "year": 256, "eventDate": "March 10, 1959", "title": "256 Birth of Foo Tsenpo lljl afakkj adfllll df af lasdfj alfjalfjlj saf llalsf lal ", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 300,
@@ -99,7 +99,7 @@ export class TimelineDataService {
       {
         "centuryId": 400,
         "era": "AD",
-        "events": [{ "id": 23, "era": "AD", "year": 436, "title": "436 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 23, "era": "AD", "year": 436, "eventDate": "March 10, 1959", "title": "436 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 500,
@@ -110,11 +110,11 @@ export class TimelineDataService {
         "centuryId": 600,
         "era": "AD",
         "events": [
-          { "id": 24, "era": "AD", "year": 655, "title": "655 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 25, "era": "AD", "year": 656, "title": "655 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 26, "era": "AD", "year": 657, "title": "655 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 27, "era": "AD", "year": 658, "title": "655 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
-          { "id": 28, "era": "AD", "year": 659, "title": "655 Birth of Foo Tsenpo", "country": "China", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"},
+          { "id": 24, "era": "AD", "year": 655, "eventDate": "March 10, 1959", "title": "655 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 25, "era": "AD", "year": 656, "eventDate": "March 10, 1959", "title": "655 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 26, "era": "AD", "year": 657, "eventDate": "March 10, 1959", "title": "655 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 27, "era": "AD", "year": 658, "eventDate": "March 10, 1959", "title": "655 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
+          { "id": 28, "era": "AD", "year": 659, "eventDate": "March 10, 1959", "title": "655 Birth of Foo Tsenpo", "country": "China",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]},
         ]
       },
       {
@@ -130,7 +130,7 @@ export class TimelineDataService {
       {
         "centuryId": 900,
         "era": "AD",
-        "events": [{ "id": 29, "era": "AD", "year": 956, "title": "956 Birth of Foo Tsenpo", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg" }]
+        "events": [{ "id": 29, "era": "AD", "year": 956, "eventDate": "March 10, 1959", "title": "956 Birth of Foo Tsenpo", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"] }]
       },
       {
         "centuryId": 1000,
@@ -145,7 +145,7 @@ export class TimelineDataService {
       {
         "centuryId": 1200,
         "era": "AD",
-        "events": [{ "id": 30, "era": "AD", "year": 1256, "title": "1234 Birth of Foo Tsenpo", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 30, "era": "AD", "year": 1256, "eventDate": "March 10, 1959", "title": "1234 Birth of Foo Tsenpo", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 1300,
@@ -155,7 +155,7 @@ export class TimelineDataService {
       {
         "centuryId": 1400,
         "era": "AD",
-        "events": [{ "id": 31, "era": "AD", "year": 1426, "title": "1434 Birth of Foo Tsenpo", "country": "Tibet", "eventTypeId": 1, "description": "Here is the description of the event", "imageUrl": "../assets/Buddha.jpg"}]
+        "events": [{ "id": 31, "era": "AD", "year": 1426, "eventDate": "March 10, 1959", "title": "1434 Birth of Foo Tsenpo", "country": "Tibet",  "description": "Here is the description of the event", "images": ["../assets/Buddha.jpg"], "references": ["http://www.wikipedia.com"]}]
       },
       {
         "centuryId": 1500,

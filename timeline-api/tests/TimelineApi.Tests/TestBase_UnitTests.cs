@@ -11,9 +11,9 @@ using Xunit;
 
 namespace TimelineApi.Tests
 {
-    public class TestBase : IClassFixture<CustomWebApplicationFactory<Program>>
+    public class TestBase_UnitTests : IClassFixture<CustomWebApplicationFactory<Program>>
     {
-        public TestBase()
+        public TestBase_UnitTests()
         {
             
         }

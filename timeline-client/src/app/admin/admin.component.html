@@ -1,7 +1,9 @@
 <!-- <p>admin works!</p> -->
-<div class="my-3">
-    <button (click)="openDialog()" class="btn btn-primary mr-3">Add Event</button>
+<div class="new-event-button-container">
+    <button mat-raised-button color="primary" (click)="openDialog()" class="btn btn-primary mr-3"><mat-icon>add</mat-icon>New Event</button>
 </div>
-<app-event-list></app-event-list>
+<div class="event-list-container">
+  <app-event-list></app-event-list>
+</div>
 
 
