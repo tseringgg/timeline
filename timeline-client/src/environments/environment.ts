@@ -16,7 +16,7 @@ export const environment: IEnvironment = {
 
   production: false,
 
-  rootApiUrl: 'http://localhost:24568/',
+  rootApiUrl: 'http://localhost:23467/',
 
   apiScopes: ['api://6c06d05c-9be0-4236-957e-37e364ffd593/access_api_as_user'],
 

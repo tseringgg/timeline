@@ -8,8 +8,8 @@ namespace timeline.domain
     {
         public MappingProfile()
         {
-            CreateMap<Event, EventDto>();
-            CreateMap<EventDto, Event> ();
+            //CreateMap<Event, EventDto>();
+            //CreateMap<EventDto, Event> ();
         }
     }
 }

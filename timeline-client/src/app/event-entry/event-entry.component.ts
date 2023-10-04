@@ -39,9 +39,9 @@ export class EventEntryComponent implements OnInit {
                                 this.eventEntryForm.get('eventDate')?.value,
                                 this.eventEntryForm.get('country').value,
                                 this.imageUrls,
-                                this.eventReferences
-                                // this.eventEntryForm.get('images')?.value,
-                                // this.eventEntryForm.get('reference')?.value,
+                                this.eventReferences,
+                                // this.eventEntryForm.get('imageUrls')?.value,
+                                // this.eventEntryForm.get('referenceUrls')?.value,
                                 )
     this.eventDataService.create(formData)
           .subscribe({
@@ -65,6 +65,8 @@ export class EventEntryComponent implements OnInit {
   addImageUrl(event): void {
     event.stopPropagation();
     let url = this.eventEntryForm.get('imageUrl')?.value;
-    this.imageUrls.push(url);
+    if (!!url && !this.imageUrls.some(x => x === url)) {
+      this.imageUrls.push(url);
+    }
   }
 }

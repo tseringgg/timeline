@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Timeline } from "../models/timeline.model";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 const httpOptions = {
   Headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
@@ -12,11 +13,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TimelineDataService {
+  url: string = `${environment.rootApiUrl}api/Timelines`;
   constructor(private http: HttpClient){}
 
   getTimelines(): Observable<Timeline[]> {
-    return of(this.getJsonTestFile());
-    // return this.http.get<TimelineEvents[]>(this.url, httpOptions);
+    // return of(this.getJsonTestFile());
+    // return this.http.get<Timeline[]>(this.url, httpOptions);
+    return this.http.get<Timeline[]>(this.url);
   }
 
   getJsonTestFile() : Timeline[] {

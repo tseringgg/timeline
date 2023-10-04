@@ -8,6 +8,7 @@ export class TimelineEvent {
 
 export class NewEvent {
   constructor(public title: string, public description: string, public era: string, public year: number,
-    public eventDate: string, public country: string, public images: string[], public references: string[]){}
+    // public eventDate: string, public country: string, public images: string[], public references: string[]){}
+    public eventDate: string, public countryId: number, public imageUrls: string[], public referenceUrls: string[]){}
 }
 
