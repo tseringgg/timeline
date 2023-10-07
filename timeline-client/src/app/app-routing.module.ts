@@ -7,11 +7,12 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { TimelineContainerComponent } from './timeline/timeline-container.component/timeline-container.component';
 
 const routes: Routes = [
   {
     path: 'timeline',
-    component: TimelineComponent,
+    component: TimelineContainerComponent,
     // canActivate: [MsalGuard]
   },
   {

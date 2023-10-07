@@ -1,0 +1,9 @@
+.link-in-popup {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+  display:list-item;
+}
+
+

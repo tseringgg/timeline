@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { config, map, Subscription } from 'rxjs';
 import { EventEditDialogComponent } from '../event-edit-dialog/event-edit-dialog.component';
-import { TimelineEvent } from '../models/event.model';
+import { Event } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 import { TimelineDataService } from '../services/timeline-data.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -17,8 +17,8 @@ import { Timeline } from '../models/timeline.model';
 export class EventListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  events: TimelineEvent[] = [];
-  selectedEvent: TimelineEvent;
+  events: Event[] = [];
+  selectedEvent: Event;
   displayedColumns: string[] = ['id', 'title', 'era', 'year', 'delete', 'isReviewed', 'isApproved'];
   subs: Subscription[] = [];
   timelines: Timeline[];

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, of, pipe, Subject, tap } from "rxjs";
 import { environment } from "src/environments/environment";
-import { NewEvent, TimelineEvent } from "../models/event.model";
+import { NewEvent, Event } from "../models/event.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class EventDataService {
   private newEventEntrySubmittedSubject = new Subject<boolean>();
   newEventEntrySubmitSubject$ = this.newEventEntrySubmittedSubject as Observable<boolean>;
 
-  get(): Observable<TimelineEvent[]> {
+  get(): Observable<Event[]> {
     // return this._httpClient.get<EventModel[]>(this.baseUrl);
 
     const eventsList = [
@@ -38,7 +38,7 @@ export class EventDataService {
     //.pipe(tap(catchError(x => console.log(`Unexpected error: ${x}`))));
   }
 
-  patch(id: number, event: TimelineEvent): Observable<any> {
+  patch(id: number, event: Event): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
     return this._httpClient.patch(url, event);
   }
@@ -48,7 +48,7 @@ export class EventDataService {
     return this._httpClient.delete(url);
   }
 
-  update(id: number, entity: TimelineEvent): Observable<any> {
+  update(id: number, entity: Event): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
     return this._httpClient.put(url, entity);
   }

@@ -26,6 +26,8 @@ import { EventEditDialogComponent } from './event-edit-dialog/event-edit-dialog.
 import { environment } from 'src/environments/environment';
 
 import { PopoverConfig, PopoverModule } from 'ngx-bootstrap/popover';
+import { CommonModule } from '@angular/common';
+import { TimelineContainerComponent } from './timeline/timeline-container.component/timeline-container.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -39,6 +41,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     UnauthorizedComponent,
     EventListComponent,
     TimelineComponent,
+    TimelineContainerComponent,
     AdminComponent,
     EventEditDialogComponent
   ],
@@ -46,6 +49,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    CommonModule,
     AppRoutingModule,
     PopoverModule,
 
@@ -76,6 +80,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         ['https://graph.microsoft.com/v1.0/me', ['user.read']]
       ])
     })
+  ],
+  exports: [
+    TimelineComponent
   ],
   providers: [
     MsalGuard,

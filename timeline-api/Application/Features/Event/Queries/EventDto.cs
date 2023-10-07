@@ -53,10 +53,16 @@ namespace Application.Features.Event.Queries
 
         //public virtual UserDto CreatorUser { get; set; }
 
-        public ICollection<ImageDto> Images { get; set; } = new List<ImageDto>();
+        public virtual ICollection<ImageDto> Images { get; set; } = new List<ImageDto>();
 
-        //public virtual UserDto LastUpdaterUser { get; set; }
+        ////public virtual UserDto LastUpdaterUser { get; set; }
 
-        public ICollection<ReferenceDto> References { get; set; } = new List<ReferenceDto>();
+        public virtual ICollection<ReferenceDto> References { get; set; } = new List<ReferenceDto>();
+
+        //public ICollection<string> ImageUrls { get; set; } = new List<string>();
+
+        ////public virtual UserDto LastUpdaterUser { get; set; }
+
+        //public ICollection<string> ReferenceUrls { get; set; } = new List<string>();
     }
 }

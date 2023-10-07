@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TimelineEvent } from '../models/event.model';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { EventViewModel } from '../models/event.model';
 import { TimelineDataService } from '../services/timeline-data.service';
 import { Timeline } from '../models/timeline.model';
+import { CountryDataService } from '../services/country-data.service';
 
 export interface EventTextPosition {
   top: string,
@@ -17,14 +17,11 @@ export interface EventTextPosition {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class TimelineComponent implements OnInit {
-  data: Timeline[] = [];
+export class TimelineComponent implements OnInit, AfterViewInit {
 
-  timelines:Timeline[] = [];
+  @Input() timelines:Timeline[] = [];
 
   hasZeroCenturyDone:boolean = false;
-
-  // spaceCounter: number = 0;
 
   spaceUnit: number = 4;
 
@@ -47,36 +44,26 @@ export class TimelineComponent implements OnInit {
   hasEvent: boolean = false;
   isReady: boolean = false;
   eventCount: number = 0;
-  totalEvents: TimelineEvent[] = [];
+  totalEvents: EventViewModel[] = [];
   verticalLineEndPos: number;
+  testData: any;
 
-  constructor(private timelineDataService: TimelineDataService) {
+  constructor(private timelineDataService: TimelineDataService, private countryDataService: CountryDataService) {
   }
 
   ngOnInit(): void {
-    // this.data = this.timelineDataService.getJsonTestFile();
+  }
 
-    this.timelineDataService.getTimelines()
-          .subscribe({
-            next: (x) => this.data = x,
-            complete: () => {
-              const bcTimelines = this.data.filter(x => x.era == "BC").sort((a,b) => a.centuryId);
-              const adTimelines = this.data.filter(x => x.era === "AD").sort((a,b) => a.centuryId);
-
-              this.timelines = bcTimelines.concat(adTimelines);
-
-              this.timelines.forEach(x => {
-                  this.totalEvents = this.totalEvents.concat(x.events.map(x => x));
-              })
-
-              console.log(`this.totalEvents == ${this.totalEvents.length}`);
-              this.initialize();
-            }
-          });
- }
+  ngAfterViewInit(): void {
+    this.initialize();
+  }
 
   initialize(): void {
     setTimeout(() => {
+       this.timelines.forEach(x => {
+        this.totalEvents = this.totalEvents.concat(x.events.map(x => x));
+      });
+
       let element = document.getElementById('container');
       let verticalLineElement = document.getElementById('vertical-line');
 
@@ -105,7 +92,8 @@ export class TimelineComponent implements OnInit {
 
       this.isCached = true;
       this.isReady = true;
-    }, 100);
+
+    }, 500);
   }
 
   private calculateBcEventPositions(era:string, centuryId:number, index: number): void {
@@ -188,15 +176,13 @@ export class TimelineComponent implements OnInit {
   }
 
   private isLastElement(currentCount:number): boolean {
-    // console.log(`idx ${idx} - txtIdx ${txtIdx} timeline ${this.timelines.length}`);
     if (this.totalEvents.length === currentCount) {
       return true;
     }
     return false;
   }
 
-  getEventTextPosition(era: string, event:TimelineEvent, eventCount: number, index:number, textIndex: number): object {
-    // console.log(`era: ${era}, event = ${event} - index = ${index} - textIndex = ${textIndex}`);
+  getEventTextPosition(era: string, event:EventViewModel, eventCount: number, index:number, textIndex: number): object {
     let spaceDelta:number = 0;
     let topPos: string = '';
     let leftPos: string = '';
@@ -204,7 +190,6 @@ export class TimelineComponent implements OnInit {
     let j = textIndex;
 
     this.eventCount = ++this.eventCount;
-    console.log(`this.eventCount ${this.eventCount}`);
 
     if (this.isLastElement(this.eventCount)) {
       this.verticalLineEndPos = this.centuryBottomBorderPos;
@@ -221,18 +206,11 @@ export class TimelineComponent implements OnInit {
         return textPosition;
       }
     }
-    // const key = this.eventTextPositions[index];
-
-    // let textPosition = this.eventTextPositions[index][textIndex];
-
-    // if (!!textPosition) {
-    //   return textPosition;
-    // }
 
     spaceDelta = this.centuryBottomBorderPos - this.centuryTopBorderPos;
     const unit = spaceDelta / eventCount;
 
-    if (event.country.toLocaleLowerCase() === 'tibet') {
+    if (event.countryName.toLocaleLowerCase() === 'tibet') {
       leftPos = '5%'; //'15em';
     } else {
       leftPos = '55%'; //'50em';
@@ -274,7 +252,7 @@ export class TimelineComponent implements OnInit {
       return this.eventTextPositions[i][j];
   }
 
-  getEvents(era: string, centuryId: number): TimelineEvent[] | undefined {
+  getEvents(era: string, centuryId: number): EventViewModel[] | undefined {
     return this.timelines.find(x => x.era === era && x.centuryId === centuryId)?.events;
   }
 

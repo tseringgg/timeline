@@ -24,7 +24,7 @@ namespace Data.Entities.Configurations
             .HasMaxLength(20)
             .HasColumnName("Middle Name");
             entity.Property(e => e.UserPrincipalName)
-            .HasMaxLength(30)
+            .HasMaxLength(60)
             .IsFixedLength();
 
             OnConfigurePartial(entity);

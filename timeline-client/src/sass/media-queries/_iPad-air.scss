@@ -42,3 +42,51 @@
     font-size: 12px;
   }
 }
+
+
+.popover {
+  background-color: rgb(87, 70, 70);
+  max-width: 600px;
+}
+
+.popover-body { width:600px; }
+
+.popup-img {
+  height: 110px;
+  margin-right: 10px;
+}
+
+.popover-title {
+  background-color: goldenrod;
+  color: rgb(89, 66, 66);
+}
+
+.popup-detail {
+  white-space: normal;
+  color: goldenrod;
+}
+
+.popover-target {
+  display: flex;
+  color: goldenrod;
+  width: 100%;
+}
+
+.sub-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-content .description {
+  margin-bottom: 5px;
+  margin-right: 20px;
+}
+
+.sub-content ul li a {
+  color: skyblue;
+}
+
+.description {
+  // width: 90%;
+  // word-wrap: break-word;
+}

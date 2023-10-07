@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TimelineEvent } from '../models/event.model';
+import { Event } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { EventDataService } from '../services/event-data.service';
 })
 
 export class EventEditDialogComponent implements OnInit {
-  eventData: TimelineEvent;
+  eventData: Event;
   eventEditForm: FormGroup;
   constructor(private fb: FormBuilder, private eventDataService: EventDataService) { }
 

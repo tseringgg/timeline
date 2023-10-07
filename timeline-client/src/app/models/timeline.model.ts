@@ -1,7 +1,7 @@
-import { TimelineEvent } from "./event.model";
+import { Event, EventViewModel } from "./event.model";
 
 export class Timeline {
 
-  constructor(public centuryId: number, public era: string, public events: TimelineEvent[]) {
+  constructor(public timelineId: number, public centuryId: number, public era: string, public events: EventViewModel[]) {
   }
 }

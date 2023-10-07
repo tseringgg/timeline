@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { NewEvent, TimelineEvent } from '../models/event.model';
+import { NewEvent, Event } from '../models/event.model';
 import { EventDataService } from '../services/event-data.service';
 
 @Component({
@@ -22,8 +22,6 @@ export class EventEntryComponent implements OnInit {
       era: ['', [Validators.required]],
       year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       eventDate: [''],
-      // timelineId: ['', [Validators.required]],
-      // eventTypeId: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.maxLength(50)]],
       imageUrl: [''],
       reference: [''],
@@ -31,7 +29,6 @@ export class EventEntryComponent implements OnInit {
   }
 
   save(): void {
-    //console.log(this.eventEntryForm)
     var formData = new NewEvent(this.eventEntryForm.get('title').value,
                                 this.eventEntryForm.get('description').value,
                                 this.eventEntryForm.get('era').value,
@@ -39,9 +36,7 @@ export class EventEntryComponent implements OnInit {
                                 this.eventEntryForm.get('eventDate')?.value,
                                 this.eventEntryForm.get('country').value,
                                 this.imageUrls,
-                                this.eventReferences,
-                                // this.eventEntryForm.get('imageUrls')?.value,
-                                // this.eventEntryForm.get('referenceUrls')?.value,
+                                this.eventReferences
                                 )
     this.eventDataService.create(formData)
           .subscribe({
@@ -49,21 +44,24 @@ export class EventEntryComponent implements OnInit {
               this.eventDataService.onNewEntry(true);
             },
             error: (err) => console.log(err),
-            complete: () => {}
+            complete: () => {
+
+            }
           })
 
   }
 
-  addReference(event): void {
-    // this.eventEntryForm.get('images')?.value,
-    event.stopPropagation();
-    let reference = this.eventEntryForm.get('reference')?.value;
+  addReference(event:MouseEvent): void {
+    event.stopImmediatePropagation();
+    event.preventDefault();
 
+    let reference = this.eventEntryForm.get('reference')?.value;
     this.eventReferences.push(reference)
   }
 
   addImageUrl(event): void {
-    event.stopPropagation();
+    event.stopImmediatePropagation();
+    event.preventDefault();
     let url = this.eventEntryForm.get('imageUrl')?.value;
     if (!!url && !this.imageUrls.some(x => x === url)) {
       this.imageUrls.push(url);
