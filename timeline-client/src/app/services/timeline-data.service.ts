@@ -18,7 +18,8 @@ export class TimelineDataService {
 
   getTimelines(): Observable<Timeline[]> {
     if (environment.name === 'local') {
-      return this.http.get<Timeline[]>(this.url);
+      return of(this.getJsonTestFile());
+      // return this.http.get<Timeline[]>(this.url);
     } else {
     return of(this.getJsonTestFile());
     }
