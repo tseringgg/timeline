@@ -29,7 +29,7 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules/"
+                "./node_modules/"
               ]
             }
           },

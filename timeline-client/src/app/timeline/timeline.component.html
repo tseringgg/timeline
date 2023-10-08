@@ -19,13 +19,13 @@
   </div>
   <div class="canvas">
     <ng-template #popTemplate let-event="event"><div class="popover-target" >
-      <img class="popup-img" [src]="event.images[0].imageUrl">
+      <img class="popup-img" [src]="event.images[0]?.imageUrl">
       <div class="sub-content">
-        <div>Description:</div>
+        <!-- <div>Description:</div> -->
         <div class="ml-3 mb-2 description">{{ event.description }}</div>
         <div *ngIf="event.references?.length > 0">
           References:
-          <ul>
+          <ul class="references">
             <li *ngFor="let ref of event.references"><a [href]="ref.url" target="_blank" class="link-in-popup">{{ ref.url}}</a></li>
           </ul>
         </div>
@@ -34,14 +34,8 @@
   </ng-template>
 
     <div class="timeline">
-      <div class="vertical-line-header">
-        <div class="vertical-line-up-arrow">&#x2191;</div>
-        <div>Earlier</div>
-      </div>
-
       <span class="older-text">Earlier</span>
       <i class="fas fa-arrow-up older-arrow"></i>
-
         <div *ngFor="let timeline of timelines; let i=index" id="index">
           <!-- Vertical center line -->
           <div class="vertical-line" [ngStyle]="getVerticalLineLength()">
@@ -68,7 +62,6 @@
             </div>
             </ng-container >
             <ng-template #zeroCentury>
-              <!-- <h1>{{ timeline.era}} - {{ timeline.centuryId}} - {{ i }}</h1> -->
               <div class="bubble" [style.top]="getBubbleTopPosition(timeline.era, timeline.centuryId, i)">
                 <span>{{ timeline.centuryId }}</span>
                 <div class="period-divider horizontal-line" [style.top]="getHorizontalLinePosition(timeline, i)"></div>
@@ -78,18 +71,14 @@
             <!-- Events -->
             <div *ngIf="timeline?.events?.length > 0">
               <ul class="event-text">
-                <!-- <ng-container *ngIf="eventTextPositions[i]"> -->
-
                   <li class="event-item" *ngFor="let ev of getEvents(timeline.era, timeline.centuryId); let idx=index"  [popover]="popTemplate" [outsideClick]="true" popoverTitle="{{ev.year}} {{ev.era}}  - {{ev.title}}" [popoverContext]="{ event: ev }" [ngStyle]="getEventTextPosition(timeline.era, ev, timeline.events.length, i, idx)">
-                  <!-- <li class="event-item" *ngFor="let ev of getEvents(timeline.era, timeline.centuryId); let idx=index" [ngStyle]="getEventTextPosition(timeline.era, ev, timeline.events.length, i, idx)"> -->
                     <ng-container *ngIf="hasEvent">
                       <span class="year">{{ ev.year }}</span>
-                      <span class="year">{{ ev.era }} - </span>
-                      <span class="event">{{ ev.title }} - </span>
+                      <span class="era">{{ ev.era }} - </span>
+                      <span class="title">{{ ev.title }} - </span>
                       <span class="country">{{ ev.countryName}}</span>
                     </ng-container>
                 </li>
-                <!-- </ng-container> -->
               </ul>
             </div>
           </ng-container>

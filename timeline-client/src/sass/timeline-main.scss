@@ -1,5 +1,6 @@
 // @use '@angular/material' as mat;
 
+@import "./media-queries/desktop";
 @import "./media-queries/iPad-air";
 @import "./media-queries/iPad-mini";
 @import "./media-queries/iPhone-XR";
@@ -383,9 +384,10 @@ mat-toolbar a:hover {
 //   margin-right: 20px;
 // }
 
-// .sub-content ul li a {
-//   color: skyblue;
-// }
+.sub-content ul li a {
+  color: skyblue;
+  list-style-type: circle;
+}
 
 
 

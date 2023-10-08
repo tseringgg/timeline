@@ -4,6 +4,16 @@
   word-break: break-all;
   white-space: normal;
   display:list-item;
+  list-style-type: circle;
+}
+
+ul.references {
+  list-style-type: circle;
+}
+
+.year, .era, .title, .country {
+  font-weight: 450;
+  opacity: 1;
 }
 
 

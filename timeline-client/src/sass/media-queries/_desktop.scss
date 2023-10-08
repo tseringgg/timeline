@@ -1,4 +1,4 @@
-@media only screen and (width <= 992px) {
+@media only screen and (width > 992px) {
   .event-text li {
     max-width: 400px;
     font-size: 14px;
@@ -41,6 +41,10 @@
   .centuryid, .period {
     font-size: 12px;
   }
+
+  // .event-item {
+  //   left: 50%;
+  // }
 }
 
 

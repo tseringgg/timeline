@@ -29,8 +29,6 @@ export class TimelineContainerComponent implements OnInit {
             t.events.forEach(e => {
               const country = countries.find(c => c.countryId === e.countryId);
               e.countryName = country.name;
-              // e.imageUrls = ["../assets/Buddha.jpg"]
-              // e.referenceUrls = ["../assets/Buddha.jpg"]
               });
           });
         },

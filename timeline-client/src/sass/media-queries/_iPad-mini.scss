@@ -1,5 +1,5 @@
 /** IPad Mini */
-@media only screen and (max-width: 768px) {
+@media only screen and (width <= 768px) {
   .event-text li {
     max-width: 290px;
     font-size: 14px;
