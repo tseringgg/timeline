@@ -9,8 +9,20 @@ export class Event {
   year: number;
   eventDate: string;
   countryId: number;
-  // imageUrls: string[];
-  // referenceUrls: string[];
+
+  timelineId: number;
+  isReviewed: boolean;
+  isDeleted: boolean;
+  isApproved: boolean;
+  reviewerUserId: number;
+  reviewDate: string;
+  creatorUserId: number;
+  createDate: string;
+  approverUserId: number;
+  approveDate: string;
+  lastUpdateDate: string;
+  lastUpdaterUserId: number;
+
   images: Image[];
   references: Reference[];
 }
