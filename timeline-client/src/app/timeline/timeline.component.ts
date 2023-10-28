@@ -96,7 +96,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.isCached = true;
       this.isReady = true;
 
-    }, 1500);
+    }, 100);
   }
 
   private calculateBcEventPositions(era:string, centuryId:number, index: number): void {

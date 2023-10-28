@@ -75,7 +75,13 @@ public partial class TimelinesDbContext : DbContext, ITimelinesDbContext
          new Country { CountryId = 4, Name = "Nepal" },
          new Country { CountryId = 5, Name = "Bhutan" },
          new Country { CountryId = 6, Name = "Pakistan" },
-         new Country { CountryId = 7, Name = "Mongolia" }
+         new Country { CountryId = 7, Name = "Mongolia" },
+         new Country { CountryId = 8, Name = "Israel" },
+         new Country { CountryId = 9, Name = "Sri Lanka" },
+         new Country { CountryId = 10, Name = "Egypt" },
+         new Country { CountryId = 10, Name = "Rome" },
+         new Country { CountryId = 10, Name = "Turkey" },
+         new Country { CountryId = 10, Name = "Greek" }
         );
     }
 

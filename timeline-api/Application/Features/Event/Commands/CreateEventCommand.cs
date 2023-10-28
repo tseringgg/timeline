@@ -20,6 +20,13 @@ namespace Application.Features.Event.Commands
 
         public async Task<EventDto> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
+            var existingEntity = await _dbContext.Event
+                                    .FirstOrDefaultAsync(x => x.Title == request.Dto.Title);
+            if (existingEntity != null)
+            {
+                return _mapper.Map<EventDto>(existingEntity);
+            }
+
             var user = await _dbContext.User.FirstOrDefaultAsync(x => x.UserPrincipalName == request.UserPrincipalName, cancellationToken);
             if (user == null)
             {
