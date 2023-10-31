@@ -32,6 +32,19 @@ namespace BulkCreateTimelineEvents
             _countriesDictionary.Add("Israel", 8);
             _countriesDictionary.Add("Sri Lanka", 9);
 
+            _countriesDictionary.Add("Japan", 10);
+            _countriesDictionary.Add("Korea", 11);
+            _countriesDictionary.Add("Iran", 12);
+            _countriesDictionary.Add("Europe", 13);
+            _countriesDictionary.Add("Americas", 14);
+            _countriesDictionary.Add("South Africa", 15);
+            _countriesDictionary.Add("North Africa", 16);
+            _countriesDictionary.Add("Baltistan", 17);
+
+
+            // Tibet, China, India, Nepal, Bhutan, Pakistan, Baltistan, Mongolia, Israel, Sri Lanka,
+            // Japan, Korea, Iran, Europe, Americas, South Africa, North Africa
+
             _httpClient = factory.CreateClient(new WebApplicationFactoryClientOptions
             {
                 AllowAutoRedirect = false,
@@ -42,7 +55,7 @@ namespace BulkCreateTimelineEvents
         }
 
         [Theory]
-        [ExcelData("TimelineEvents.xlsx", "select * from [Sheet1$A1:H23]")]
+        [ExcelData("TimelineEvents.xlsx", "select * from [Sheet1$A1:H22]")]
         public async Task BulkUploadTimelineEvents(string title, string description, string era, int year, string? eventDate, string imageUrls, string referenceUrls, string countryName)
         {
             var newEvent = new CreateEventDto

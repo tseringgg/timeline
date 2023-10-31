@@ -20,13 +20,11 @@ namespace Application.Features.Timeline.Queries
         {
             var dboList = await _dbContext.Timeline
                             .AsNoTracking()
+                            .Where(x => x.Event.Count > 0)
                             .Include(x => x.Event)
                             .ThenInclude(x => x.Reference)
                             .Include(x => x.Event)
                             .ThenInclude(x => x.Image)
-                            //.Include(x => x.Event.SelectMany(x => x.Image))
-                            //.Include("Image")
-                            //.Include("Reference")
                             .ToListAsync(cancellationToken);
 
             return _mapper.Map<List<TimelineDto>>(dboList);

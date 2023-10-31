@@ -31,7 +31,7 @@ export class TimelineContainerComponent implements OnInit {
       ])
         .subscribe({
           next: ([countries, timelines]) => {
-            this.timelines = timelines;
+            this.timelines = timelines.filter(x => x.events.length > 0);
             this.timelines.forEach(t => {
               t.events.forEach(e => {
                 const country = countries.find(c => c.countryId === e.countryId);
