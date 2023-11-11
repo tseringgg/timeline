@@ -2,4 +2,6 @@
   <button mat-raised-button (click)="SaveToJsonFile()">Save To Json File</button>
   <div>{{ jsonContent }}</div>
 </ng-container>
-<app-timeline [timelines]="timelines"></app-timeline>
+<ng-container *ngIf="timelines">
+  <app-timeline [timelines]="timelines"></app-timeline>
+</ng-container>

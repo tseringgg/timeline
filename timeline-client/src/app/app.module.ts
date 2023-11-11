@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { MsalGuard, MsalInterceptor, MsalModule } from '@azure/msal-angular';
+import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EventEntryComponent } from './event-entry/event-entry.component';
@@ -97,6 +97,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       multi: true
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }

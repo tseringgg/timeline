@@ -23,6 +23,7 @@ import { environment } from "src/environments/environment";
 //import { UserRoleService } from "./role-services";
 
 import { SilentRequest } from "@azure/msal-browser/dist/request/SilentRequest";
+import { AuthService } from "./auth.service";
 
 
 
@@ -49,9 +50,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   // }
 
 
-  constructor(private _router: Router, private msalService: MsalService) {
+  constructor(private _router: Router, private authService: AuthService) {
 
-    this.activeAccount = this.msalService.instance.getActiveAccount();
+    this.activeAccount = this.authService.msalService.instance.getActiveAccount();
 
   }
 
@@ -151,10 +152,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     // }
 
-const account = this.msalService.instance.getActiveAccount();
+const account = this.authService.msalService.instance.getActiveAccount();
 
-const promise = lastValueFrom(this.msalService.initialize())
-                  .then(() => lastValueFrom(this.msalService?.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest)));
+const promise = lastValueFrom(this.authService.msalService.initialize())
+                  .then(() => lastValueFrom(this.authService.msalService?.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest)));
 
     // return from(this.msalService.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest).toPromise().then(data => {
       return from(promise.then(data => {

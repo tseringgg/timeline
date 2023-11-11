@@ -62,8 +62,8 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   initialize(): void {
     setTimeout(() => {
-      console.log(this.timelines);
-       this.timelines.forEach(x => {
+      // console.log(this.timelines);
+       this.timelines?.forEach(x => {
         this.totalEvents = this.totalEvents.concat(x.events.map(x => x));
       });
 

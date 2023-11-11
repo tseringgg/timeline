@@ -28,7 +28,7 @@ export class AuthService {
 
 
 
-  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private msalService: MsalService) {
+  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, public msalService: MsalService) {
 
     this.broadcastService.inProgress$
 
@@ -102,4 +102,4 @@ export class AuthService {
 
     }
 
-} 
+}
