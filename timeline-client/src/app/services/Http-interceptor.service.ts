@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 
 import { MsalService } from "@azure/msal-angular";
 
-import { from, Observable, of } from "rxjs";
+import { from, lastValueFrom, Observable, of } from "rxjs";
 
 import { finalize, tap } from "rxjs/operators";
 
@@ -153,7 +153,11 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 const account = this.msalService.instance.getActiveAccount();
 
-    return from(this.msalService.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest).toPromise().then(data => {
+const promise = lastValueFrom(this.msalService.initialize())
+                  .then(() => lastValueFrom(this.msalService?.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest)));
+
+    // return from(this.msalService.acquireTokenSilent(tokenRequests[tokenRequestKey] as SilentRequest).toPromise().then(data => {
+      return from(promise.then(data => {
 
         const accessToken = data.accessToken;
 
