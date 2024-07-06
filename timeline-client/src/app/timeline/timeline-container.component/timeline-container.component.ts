@@ -24,7 +24,7 @@ export class TimelineContainerComponent implements OnInit {
   ngOnInit(): void {
     this.isLocal = environment.name === 'local';
 
-    if (this.isLocal) {
+    if (!this.isLocal) {
       forkJoin([
         this.countryDataService.getCountries(),
         this.timelineDataService.getTimelines()
